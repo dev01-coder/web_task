@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Services - My Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-5 text-center">My Services</h1>
+    
+    <div class="row g-4">
+        {% for service in services %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm hover-card">
+                <div class="card-body text-center">
+                    <div class="service-icon mb-3">{{ service.icon }}</div>
+                    <h5 class="card-title">{{ service.title }}</h5>
+                    <p class="card-text">{{ service.description }}</p>
+                    <a href="#" class="btn btn-primary btn-sm" onclick="requestService('{{ service.title }}'); return false;">Request Service</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h4 class="card-title mb-3">Interested in working together?</h4>
+                    <p class="card-text mb-4">Let's discuss your project and find the perfect solution for your needs.</p>
+                    <a href="/contact" class="btn btn-primary btn-lg">Start a Project</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function requestService(service) {
+    alert('Thank you for your interest in: ' + service + '\n\nPlease fill out the contact form to discuss details.');
+}
+</script>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} - Blog{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <a href="/blog" class="btn btn-outline-secondary mb-4">
+                <i class="fas fa-arrow-left"></i> Back to Blog
+            </a>
+            
+            <article>
+                <img src="{{ post.image }}" alt="{{ post.title }}" class="img-fluid rounded shadow mb-4">
+                
+                <h1 class="mb-2">{{ post.title }}</h1>
+                <small class="text-muted">By {{ post.author }} | {{ post.date }}</small>
+                
+                <hr class="my-4">
+                
+                <div class="blog-content">
+                    <p class="lead">{{ post.content }}</p>
+                    
+                    <h3>Key Takeaways</h3>
+                    <ul>
+                        <li>Understand the fundamentals of the topic</li>
+                        <li>Learn best practices from industry experts</li>
+                        <li>Apply the concepts to your projects</li>
+                        <li>Continue learning and improving</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>This article has covered the essential concepts you need to know. Remember to always stay updated with the latest 
+                    technologies and continue learning throughout your career.</p>
+                    
+                    <hr class="my-4">
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>Share this post:</strong>
+                            <a href="#" class="btn btn-sm btn-outline-primary me-2" title="Share on Twitter" onclick="shareOnTwitter(); return false;"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="btn btn-sm btn-outline-primary me-2" title="Share on LinkedIn" onclick="shareOnLinkedIn(); return false;"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="btn btn-sm btn-outline-primary" title="Share on Facebook" onclick="shareOnFacebook(); return false;"><i class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <div class="card mt-5">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Like this post?</h5>
+                    <p class="card-text">Subscribe to get more articles like this delivered to your inbox.</p>
+                    <input type="email" class="form-control mb-2" placeholder="Your email">
+                    <button class="btn btn-primary" onclick="subscribeFromBlog()">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function shareOnTwitter() {
+    alert('Share on Twitter: {{ post.title }}');
+}
+
+function shareOnLinkedIn() {
+    alert('Share on LinkedIn: {{ post.title }}');
+}
+
+function shareOnFacebook() {
+    alert('Share on Facebook: {{ post.title }}');
+}
+
+function subscribeFromBlog() {
+    alert('Thank you for subscribing!');
+}
+</script>
+{% endblock %}

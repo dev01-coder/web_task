@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - My Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-5 text-center">Blog</h1>
+    
+    <div class="row">
+        <div class="col-lg-8">
+            {% for post in posts %}
+            <div class="card mb-4 shadow-sm hover-card">
+                <img src="{{ post.image }}" class="card-img-top" alt="{{ post.title }}">
+                <div class="card-body">
+                    <small class="text-muted">By {{ post.author }} | {{ post.date }}</small>
+                    <h3 class="card-title mt-2">{{ post.title }}</h3>
+                    <p class="card-text">{{ post.excerpt }}</p>
+                    <a href="/blog/{{ post.id }}" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">About This Blog</h5>
+                    <p>I write about web development, best practices, and my experiences in the tech industry.</p>
+                    <h6>Categories</h6>
+                    <div>
+                        <a href="#" class="badge bg-primary me-2">Web Development</a>
+                        <a href="#" class="badge bg-secondary me-2">JavaScript</a>
+                        <a href="#" class="badge bg-info">Python</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-4">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Subscribe</h5>
+                    <p>Get updates on new blog posts</p>
+                    <input type="email" class="form-control mb-2" placeholder="Your email">
+                    <button class="btn btn-primary w-100" onclick="subscribe()">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function subscribe() {
+    alert('Thank you for subscribing to the blog!');
+}
+</script>
+{% endblock %}

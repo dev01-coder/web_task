@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}Home - My Portfolio{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container h-100 d-flex align-items-center">
+        <div class="row w-100">
+            <div class="col-lg-8">
+                <h1 class="display-3 fw-bold mb-4">Hi, I'm a Developer</h1>
+                <p class="lead mb-4">Crafting beautiful and functional web experiences. Passionate about technology and innovation.</p>
+                <div>
+                    <a href="/projects" class="btn btn-primary btn-lg me-3">View My Work</a>
+                    <a href="/contact" class="btn btn-outline-light btn-lg">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Featured Skills</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 text-center hover-card">
+                    <div class="card-body">
+                        <div class="skill-icon mb-3">🚀</div>
+                        <h5 class="card-title">Backend Development</h5>
+                        <p class="card-text">Python, Flask, Django, REST APIs</p>
+                        <a href="/services" class="btn btn-sm btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 text-center hover-card">
+                    <div class="card-body">
+                        <div class="skill-icon mb-3">💻</div>
+                        <h5 class="card-title">Frontend Development</h5>
+                        <p class="card-text">HTML, CSS, JavaScript, Bootstrap</p>
+                        <a href="/services" class="btn btn-sm btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 text-center hover-card">
+                    <div class="card-body">
+                        <div class="skill-icon mb-3">🗄️</div>
+                        <h5 class="card-title">Database Design</h5>
+                        <p class="card-text">SQL, MongoDB, Data Modeling</p>
+                        <a href="/services" class="btn btn-sm btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Recent Projects</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm hover-card">
+                    <img src="https://via.placeholder.com/300x200?text=Project+1" class="card-img-top" alt="Project">
+                    <div class="card-body">
+                        <h5 class="card-title">Portfolio Website</h5>
+                        <p class="card-text">A beautiful responsive portfolio built with Flask and Bootstrap</p>
+                        <a href="/project/1" class="btn btn-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm hover-card">
+                    <img src="https://via.placeholder.com/300x200?text=Project+2" class="card-img-top" alt="Project">
+                    <div class="card-body">
+                        <h5 class="card-title">Task Manager App</h5>
+                        <p class="card-text">Simple task management application with local storage</p>
+                        <a href="/project/2" class="btn btn-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm hover-card">
+                    <img src="https://via.placeholder.com/300x200?text=Project+3" class="card-img-top" alt="Project">
+                    <div class="card-body">
+                        <h5 class="card-title">Weather App</h5>
+                        <p class="card-text">Real-time weather information using public APIs</p>
+                        <a href="/project/3" class="btn btn-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-5">
+            <a href="/projects" class="btn btn-primary btn-lg">View All Projects</a>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Latest Blog Posts</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 hover-card">
+                    <img src="https://via.placeholder.com/300x200?text=Flask+Tutorial" class="card-img-top" alt="Blog">
+                    <div class="card-body">
+                        <small class="text-muted">Jan 15, 2026</small>
+                        <h5 class="card-title">Getting Started with Flask</h5>
+                        <p class="card-text">Learn the basics of Flask web framework...</p>
+                        <a href="/blog/1" class="btn btn-primary btn-sm">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 hover-card">
+                    <img src="https://via.placeholder.com/300x200?text=JavaScript+ES6" class="card-img-top" alt="Blog">
+                    <div class="card-body">
+                        <small class="text-muted">Jan 12, 2026</small>
+                        <h5 class="card-title">Modern JavaScript ES6 Features</h5>
+                        <p class="card-text">Explore the latest ES6 features...</p>
+                        <a href="/blog/2" class="btn btn-primary btn-sm">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 hover-card">
+                    <img src="https://via.placeholder.com/300x200?text=Database+Design" class="card-img-top" alt="Blog">
+                    <div class="card-body">
+                        <small class="text-muted">Jan 10, 2026</small>
+                        <h5 class="card-title">Database Design Best Practices</h5>
+                        <p class="card-text">Master efficient database design...</p>
+                        <a href="/blog/3" class="btn btn-primary btn-sm">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-5">
+            <a href="/blog" class="btn btn-primary btn-lg">View All Posts</a>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="mb-4">Ready to work together?</h2>
+        <p class="lead mb-4">Let's create something amazing. Get in touch with me today.</p>
+        <a href="/contact" class="btn btn-light btn-lg">Contact Me Now</a>
+    </div>
+</section>
+{% endblock %}

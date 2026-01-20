@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project.title }} - My Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto">
+            <a href="/projects" class="btn btn-outline-secondary mb-4">
+                <i class="fas fa-arrow-left"></i> Back to Projects
+            </a>
+            
+            <img src="{{ project.image }}" alt="{{ project.title }}" class="img-fluid rounded shadow mb-4">
+            
+            <h1 class="mb-3">{{ project.title }}</h1>
+            <p class="lead">{{ project.description }}</p>
+            
+            <h4 class="mt-4 mb-3">Technologies Used:</h4>
+            <div class="mb-4">
+                {% for tech in project.tech %}
+                <span class="badge bg-primary me-2 mb-2">{{ tech }}</span>
+                {% endfor %}
+            </div>
+            
+            <hr>
+            
+            <h4 class="mt-4 mb-3">Project Details</h4>
+            <p>This project showcases modern web development practices and best practices in creating scalable, maintainable code. 
+            The application demonstrates full-stack capabilities with both frontend and backend components working together seamlessly.</p>
+            
+            <h5>Key Features:</h5>
+            <ul>
+                <li>Responsive and mobile-friendly design</li>
+                <li>Clean, maintainable code structure</li>
+                <li>Efficient database optimization</li>
+                <li>RESTful API implementation</li>
+                <li>User-friendly interface</li>
+            </ul>
+            
+            <div class="mt-4">
+                <a href="#" onclick="viewProject('{{ project.title }}'); return false;" class="btn btn-primary btn-lg me-2">
+                    <i class="fas fa-external-link-alt"></i> View Live Project
+                </a>
+                <a href="#" onclick="viewGitHub('{{ project.title }}'); return false;" class="btn btn-outline-primary btn-lg">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function viewProject(title) {
+    alert('Live version of ' + title + ' would open here!');
+}
+
+function viewGitHub(title) {
+    alert('GitHub repository for ' + title + ' would open here!');
+}
+</script>
+{% endblock %}

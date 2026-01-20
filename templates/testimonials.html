@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Testimonials - My Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-5 text-center">Client Testimonials</h1>
+    
+    <div class="row g-4">
+        {% for testimonial in testimonials %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm hover-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="{{ testimonial.image }}" alt="{{ testimonial.name }}" class="rounded-circle me-3" width="50" height="50">
+                        <div>
+                            <h6 class="mb-0">{{ testimonial.name }}</h6>
+                            <small class="text-muted">{{ testimonial.company }}</small>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        {% for i in range(testimonial.rating) %}
+                        <i class="fas fa-star text-warning"></i>
+                        {% endfor %}
+                    </div>
+                    
+                    <p class="card-text">"{{ testimonial.text }}"</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-lg-8 mx-auto text-center">
+            <h3 class="mb-4">Want to work with me?</h3>
+            <p class="lead mb-4">I love working with amazing clients and delivering exceptional results.</p>
+            <a href="/contact" class="btn btn-primary btn-lg">Let's Get Started</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
