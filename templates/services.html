@@ -11,7 +11,7 @@
         <div class="col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm hover-card">
                 <div class="card-body text-center">
-                    <div class="service-icon mb-3">{{ service.icon }}</div>
+                    <div class="service-icon mb-3">{{ service.icon|safe }}</div>
                     <h5 class="card-title">{{ service.title }}</h5>
                     <p class="card-text">{{ service.description }}</p>
                     <a href="#" class="btn btn-primary btn-sm" onclick="requestService('{{ service.title }}'); return false;">Request Service</a>

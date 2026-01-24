@@ -1,170 +1,142 @@
 from flask import Flask, render_template, request, jsonify
 import os
 from datetime import datetime
+import logging
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key-here'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-change-in-production')
+app.config['JSON_SORT_KEYS'] = False
 
-# Sample projects data
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Sample projects data - Updated with Ozair's projects
 PROJECTS = [
     {
         'id': 1,
-        'title': 'Portfolio Website',
-        'description': 'A beautiful responsive portfolio built with Flask and Bootstrap',
-        'tech': ['Flask', 'Python', 'HTML', 'CSS'],
-        'image': 'https://via.placeholder.com/300x200?text=Portfolio'
+        'title': 'AI Medical Coding Assistant',
+        'description': 'Developed an AI Medical Coding Assistant using LLM to predict ICD, CPT, and Modifier codes with RAG and OCR for processing medical documents',
+        'tech': ['Python', 'Flask', 'Langchain', 'MySQL', 'Docker', 'Azure'],
+        'image': 'https://loremflickr.com/600/400/healthcare'
     },
     {
         'id': 2,
-        'title': 'Task Manager App',
-        'description': 'Simple task management application with local storage',
-        'tech': ['JavaScript', 'HTML', 'CSS'],
-        'image': 'https://via.placeholder.com/300x200?text=Task+Manager'
+        'title': 'AI-Powered HCFA OCR',
+        'description': 'Web application to automate data extraction from HCFA forms using OCR technology, extracting billing details and eliminating manual data entry',
+        'tech': ['Python', 'Gemini', 'Flask', 'Google Vision', 'Azure'],
+        'image': 'https://loremflickr.com/600/400/ocr'
     },
     {
         'id': 3,
-        'title': 'Weather App',
-        'description': 'Real-time weather information using public APIs',
-        'tech': ['Python', 'Flask', 'API'],
-        'image': 'https://via.placeholder.com/300x200?text=Weather'
+        'title': 'AI Call Quality Auditor',
+        'description': 'System for transcribing speech to text and evaluating calls for grammar, tone, and communication standards using LLMs',
+        'tech': ['Python', 'Gemini', 'Flask', 'Whisper', 'Azure'],
+        'image': 'https://loremflickr.com/600/400/audio'
     },
     {
         'id': 4,
-        'title': 'E-commerce Platform',
-        'description': 'Full-featured e-commerce site with payment integration',
-        'tech': ['Django', 'PostgreSQL', 'Stripe', 'React'],
-        'image': 'https://via.placeholder.com/300x200?text=E-commerce'
-    },
-    {
-        'id': 5,
-        'title': 'Chat Application',
-        'description': 'Real-time messaging app with WebSocket support',
-        'tech': ['Node.js', 'WebSocket', 'MongoDB'],
-        'image': 'https://via.placeholder.com/300x200?text=Chat+App'
-    },
-    {
-        'id': 6,
-        'title': 'Data Visualization Dashboard',
-        'description': 'Interactive analytics dashboard with real-time data',
-        'tech': ['Python', 'D3.js', 'Flask', 'PostgreSQL'],
-        'image': 'https://via.placeholder.com/300x200?text=Dashboard'
+        'title': 'Claim Denial Prediction System',
+        'description': 'Machine learning system to forecast acceptance or rejection of claims based on 837 data using Random Forest, Neural Networks, and Decision Trees',
+        'tech': ['Python', 'Gemini', 'Flask', 'Google Vision', 'Azure', 'ML'],
+        'image': 'https://loremflickr.com/600/400/machine,learning'
     }
 ]
 
-# Skills data
+# Skills data - Updated with Ozair's skills
 SKILLS = [
     {'name': 'Python', 'level': 95},
-    {'name': 'JavaScript', 'level': 88},
-    {'name': 'Flask/Django', 'level': 90},
-    {'name': 'React', 'level': 85},
-    {'name': 'SQL', 'level': 92},
-    {'name': 'HTML/CSS', 'level': 95},
-    {'name': 'Docker', 'level': 80},
-    {'name': 'Git', 'level': 93}
+    {'name': 'SQL', 'level': 90},
+    {'name': 'Large Language Models (LLM)', 'level': 92},
+    {'name': 'Flask/FastAPI', 'level': 88},
+    {'name': 'Machine Learning', 'level': 85},
+    {'name': 'OCR & Computer Vision', 'level': 87},
+    {'name': 'RAG & Prompt Engineering', 'level': 90},
+    {'name': 'Azure Cloud', 'level': 85},
+    {'name': 'Git & DevOps', 'level': 88},
+    {'name': 'NLP & Classification', 'level': 86}
 ]
 
-# Blog posts data
+# Blog posts data - Updated with AI/ML topics
 BLOG_POSTS = [
     {
         'id': 1,
-        'title': 'Getting Started with Flask',
-        'author': 'John Doe',
-        'date': 'Jan 15, 2026',
-        'excerpt': 'Learn the basics of Flask web framework and build your first web application.',
-        'content': 'Flask is a lightweight WSGI web application framework written in Python. It is designed to make getting started quick and easy, with the ability to scale up to complex applications. In this post, we will explore the fundamentals of Flask...',
-        'image': 'https://via.placeholder.com/600x400?text=Flask+Tutorial'
+        'title': 'Getting Started with Large Language Models',
+        'author': 'Ozair Ilyas',
+        'date': 'Jan 20, 2026',
+        'excerpt': 'Learn the fundamentals of LLMs, RAG, and how to integrate them into your applications.',
+        'content': 'Large Language Models have revolutionized AI development. In this comprehensive guide, we explore LLM basics, Retrieval-Augmented Generation (RAG), prompt engineering, and practical integration patterns...',
+        'image': 'https://loremflickr.com/600/400/ai'
     },
     {
         'id': 2,
-        'title': 'Modern JavaScript ES6 Features',
-        'author': 'Jane Smith',
-        'date': 'Jan 12, 2026',
-        'excerpt': 'Explore the latest ES6 features that make JavaScript development more efficient and enjoyable.',
-        'content': 'ES6 introduced many new features that have revolutionized JavaScript development. From arrow functions to classes, destructuring to async/await, these features make code more readable and maintainable...',
-        'image': 'https://via.placeholder.com/600x400?text=JavaScript+ES6'
+        'title': 'Building Healthcare AI Solutions',
+        'author': 'Ozair Ilyas',
+        'date': 'Jan 18, 2026',
+        'excerpt': 'Insights into developing AI solutions for medical coding, claims processing, and healthcare automation.',
+        'content': 'Healthcare AI presents unique challenges and opportunities. This post covers medical data handling, HIPAA considerations, and building robust healthcare AI systems using Python and cloud services...',
+        'image': 'https://loremflickr.com/600/400/health'
     },
     {
         'id': 3,
-        'title': 'Database Design Best Practices',
-        'author': 'Mike Johnson',
-        'date': 'Jan 10, 2026',
-        'excerpt': 'Master the art of designing efficient and scalable database schemas.',
-        'content': 'Proper database design is crucial for application performance. In this comprehensive guide, we will cover normalization, indexing strategies, and optimization techniques...',
-        'image': 'https://via.placeholder.com/600x400?text=Database+Design'
+        'title': 'OCR and Computer Vision for Document Processing',
+        'author': 'Ozair Ilyas',
+        'date': 'Jan 15, 2026',
+        'excerpt': 'Mastering document extraction and data recognition using OCR and Google Vision API.',
+        'content': 'Automating document processing is crucial for many industries. Learn how to use Google Vision, OpenCV, and modern OCR techniques to extract and validate data from medical forms, receipts, and documents...',
+        'image': 'https://loremflickr.com/600/400/document'
     },
     {
         'id': 4,
-        'title': 'REST API Design Principles',
-        'author': 'Sarah Williams',
-        'date': 'Jan 8, 2026',
-        'excerpt': 'Build scalable and maintainable REST APIs following industry best practices.',
-        'content': 'REST APIs are the backbone of modern web applications. Learn how to design APIs that are easy to understand, use, and maintain...',
-        'image': 'https://via.placeholder.com/600x400?text=REST+API'
+        'title': 'Machine Learning for Predictive Analytics',
+        'author': 'Ozair Ilyas',
+        'date': 'Jan 12, 2026',
+        'excerpt': 'Using Random Forest, Neural Networks, and Decision Trees for claims prediction and business intelligence.',
+        'content': 'Predictive analytics can significantly impact business outcomes. Explore machine learning algorithms, feature engineering, model evaluation, and deployment strategies for production systems...',
+        'image': 'https://loremflickr.com/600/400/data'
     }
 ]
 
 # Testimonials data
-TESTIMONIALS = [
-    {
-        'name': 'Alice Johnson',
-        'company': 'Tech Startup Inc.',
-        'text': 'Excellent work! The portfolio website exceeded our expectations. Very professional and responsive.',
-        'rating': 5,
-        'image': 'https://via.placeholder.com/100x100?text=Alice'
-    },
-    {
-        'name': 'Bob Martinez',
-        'company': 'Digital Solutions Ltd.',
-        'text': 'Great developer with strong technical skills. Delivered on time and within budget.',
-        'rating': 5,
-        'image': 'https://via.placeholder.com/100x100?text=Bob'
-    },
-    {
-        'name': 'Carol Davis',
-        'company': 'Creative Agency Co.',
-        'text': 'Professional, reliable, and easy to work with. Would definitely hire again!',
-        'rating': 5,
-        'image': 'https://via.placeholder.com/100x100?text=Carol'
-    }
-]
+TESTIMONIALS = []
 
-# Services data
+# Services data - Updated with AI services
 SERVICES = [
     {
         'id': 1,
-        'title': 'Web Development',
-        'description': 'Full-stack web development using modern technologies and frameworks',
-        'icon': '🌐'
+        'title': 'AI & Machine Learning',
+        'description': 'Develop intelligent systems using LLMs, RAG, classification, and predictive analytics',
+        'icon': '<i class="fas fa-brain"></i>'
     },
     {
         'id': 2,
-        'title': 'Mobile App Development',
-        'description': 'Native and cross-platform mobile applications for iOS and Android',
-        'icon': '📱'
+        'title': 'Healthcare AI Solutions',
+        'description': 'Medical coding assistance, claim prediction, and healthcare automation using AI',
+        'icon': '<i class="fas fa-hospital"></i>'
     },
     {
         'id': 3,
-        'title': 'API Development',
-        'description': 'RESTful and GraphQL API design and development',
-        'icon': '⚙️'
+        'title': 'Document Processing & OCR',
+        'description': 'Automated document extraction, data recognition, and processing using OCR and Vision APIs',
+        'icon': '<i class="fas fa-file-pdf"></i>'
     },
     {
         'id': 4,
-        'title': 'Database Design',
-        'description': 'Efficient database schema design and optimization',
-        'icon': '🗄️'
+        'title': 'API Development',
+        'description': 'RESTful and GraphQL API design using Python Flask, FastAPI with Azure cloud integration',
+        'icon': '<i class="fas fa-cog"></i>'
     },
     {
         'id': 5,
         'title': 'Cloud Deployment',
-        'description': 'Deploy applications to AWS, Google Cloud, or Azure',
-        'icon': '☁️'
+        'description': 'Deploy AI/ML applications to Azure, Google Cloud, and optimize for production',
+        'icon': '<i class="fas fa-cloud"></i>'
     },
     {
         'id': 6,
-        'title': 'Consulting',
-        'description': 'Technical consulting and architecture guidance',
-        'icon': '💡'
+        'title': 'Data Analytics & Insights',
+        'description': 'Extract actionable insights from healthcare and business data using ML algorithms',
+        'icon': '<i class="fas fa-chart-bar"></i>'
     }
 ]
 
@@ -209,22 +181,32 @@ def blog_detail(post_id):
         return render_template('404.html'), 404
     return render_template('blog_detail.html', post=post)
 
-@app.route('/testimonials')
-def testimonials():
-    return render_template('testimonials.html', testimonials=TESTIMONIALS)
-
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
-        data = request.get_json()
-        message = {
-            'name': data.get('name'),
-            'email': data.get('email'),
-            'message': data.get('message'),
-            'date': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        }
-        MESSAGES.append(message)
-        return jsonify({'status': 'success', 'message': 'Message sent successfully!'})
+        try:
+            data = request.get_json()
+            
+            # Validate required fields
+            if not data or not data.get('name') or not data.get('email') or not data.get('message'):
+                return jsonify({'status': 'error', 'message': 'Missing required fields'}), 400
+            
+            # Validate email format
+            if '@' not in data.get('email', ''):
+                return jsonify({'status': 'error', 'message': 'Invalid email format'}), 400
+            
+            message = {
+                'name': data.get('name'),
+                'email': data.get('email'),
+                'message': data.get('message'),
+                'date': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            }
+            MESSAGES.append(message)
+            logger.info(f"New contact message from {data.get('name')} ({data.get('email')})")
+            return jsonify({'status': 'success', 'message': 'Message sent successfully!'})
+        except Exception as e:
+            logger.error(f"Error processing contact form: {str(e)}")
+            return jsonify({'status': 'error', 'message': 'Server error'}), 500
     return render_template('contact.html')
 
 @app.route('/api/messages')
@@ -247,5 +229,13 @@ def download_cv():
 def not_found(error):
     return render_template('404.html'), 404
 
+@app.errorhandler(500)
+def server_error(error):
+    logger.error(f"Server error: {str(error)}")
+    return render_template('404.html'), 500
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    # Production: Use environment variable to set debug mode
+    debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=debug_mode, port=port, host='0.0.0.0')

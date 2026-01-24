@@ -11,23 +11,23 @@
             <div class="row mb-5">
                 <div class="col-md-4 text-center mb-4">
                     <div class="contact-info-card">
-                        <i class="fas fa-map-marker-alt fa-2x text-primary mb-3"></i>
-                        <h5>Address</h5>
-                        <p>123 Dev Street, Tech City, TC 12345</p>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center mb-4">
-                    <div class="contact-info-card">
-                        <i class="fas fa-phone fa-2x text-primary mb-3"></i>
-                        <h5>Phone</h5>
-                        <p><a href="tel:+1234567890" class="text-decoration-none">(123) 456-7890</a></p>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center mb-4">
-                    <div class="contact-info-card">
                         <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
                         <h5>Email</h5>
-                        <p><a href="mailto:contact@example.com" class="text-decoration-none">contact@example.com</a></p>
+                        <p><a href="mailto:sardarozair13@gmail.com" class="text-decoration-none">sardarozair13@gmail.com</a></p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="contact-info-card">
+                        <i class="fab fa-linkedin fa-2x text-primary mb-3"></i>
+                        <h5>LinkedIn</h5>
+                        <p><a href="https://pk.linkedin.com/in/ozair-ilyas" class="text-decoration-none">pk.linkedin.com/in/ozair-ilyas</a></p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="contact-info-card">
+                        <i class="fab fa-github fa-2x text-primary mb-3"></i>
+                        <h5>GitHub</h5>
+                        <p><a href="https://github.com" class="text-decoration-none" target="_blank" rel="noopener noreferrer">github.com/ozairilyas</a></p>
                     </div>
                 </div>
             </div>
@@ -68,14 +68,6 @@
                             <i class="fas fa-paper-plane"></i> Send Message
                         </button>
                     </form>
-                    
-                    <div id="successMessage" class="alert alert-success mt-3 hidden">
-                        <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully. I'll get back to you soon.
-                    </div>
-                    
-                    <div id="errorMessage" class="alert alert-danger mt-3 hidden">
-                        <i class="fas fa-exclamation-circle"></i> Oops! Something went wrong. Please try again.
-                    </div>
                 </div>
             </div>
         </div>
@@ -85,10 +77,6 @@
 <script>
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    
-    // Hide previous messages
-    document.getElementById('successMessage').classList.add('hidden');
-    document.getElementById('errorMessage').classList.add('hidden');
     
     const formData = {
         name: document.getElementById('name').value,
@@ -107,18 +95,14 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     .then(data => {
         if (data.status === 'success') {
             document.getElementById('contactForm').reset();
-            document.getElementById('successMessage').classList.remove('hidden');
-            // Hide message after 5 seconds
-            setTimeout(() => {
-                document.getElementById('successMessage').classList.add('hidden');
-            }, 5000);
+            alert('Thank you! Your message has been sent successfully. I\'ll get back to you soon.');
         } else {
-            document.getElementById('errorMessage').classList.remove('hidden');
+            alert('Oops! Something went wrong. Please try again.');
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        document.getElementById('errorMessage').style.display = 'block';
+        alert('Error sending message. Please try again.');
     });
 });
 </script>
