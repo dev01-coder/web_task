@@ -36,34 +36,38 @@
                 <div class="card-body">
                     <h4 class="card-title mb-4">Send Me a Message</h4>
                     
-                    <form id="contactForm">
+                    <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="contact">
+                        <p class="d-none">
+                            <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                        </p>
                         <div class="mb-3">
                             <label for="name" class="form-label">Full Name *</label>
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="email" class="form-label">Email Address *</label>
                             <input type="email" class="form-control" id="email" name="email" required>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="subject" class="form-label">Subject</label>
                             <input type="text" class="form-control" id="subject" name="subject">
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="message" class="form-label">Message *</label>
                             <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
                         </div>
-                        
+
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="terms" required>
                             <label class="form-check-label" for="terms">
                                 I agree to the privacy policy
                             </label>
                         </div>
-                        
+
                         <button type="submit" class="btn btn-primary btn-lg w-100">
                             <i class="fas fa-paper-plane"></i> Send Message
                         </button>
@@ -74,36 +78,4 @@
     </div>
 </div>
 
-<script>
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        message: document.getElementById('message').value
-    };
-    
-    fetch('/contact', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            document.getElementById('contactForm').reset();
-            alert('Thank you! Your message has been sent successfully. I\'ll get back to you soon.');
-        } else {
-            alert('Oops! Something went wrong. Please try again.');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Error sending message. Please try again.');
-    });
-});
-</script>
 {% endblock %}

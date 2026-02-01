@@ -145,43 +145,43 @@ MESSAGES = []
 
 @app.route('/favicon.ico')
 def favicon():
-    return '', 204
+    return app.send_static_file('favicon.ico') if os.path.exists(os.path.join(app.static_folder, 'favicon.ico')) else ('', 204)
 
 @app.route('/')
 def home():
     return render_template('index.html')
 
-@app.route('/about')
+@app.route('/about/')
 def about():
     return render_template('about.html', skills=SKILLS)
 
-@app.route('/projects')
+@app.route('/projects/')
 def projects():
     return render_template('projects.html', projects=PROJECTS)
 
-@app.route('/project/<int:project_id>')
+@app.route('/project/<int:project_id>/')
 def project_detail(project_id):
     project = next((p for p in PROJECTS if p['id'] == project_id), None)
     if project is None:
         return render_template('404.html'), 404
     return render_template('project_detail.html', project=project)
 
-@app.route('/services')
+@app.route('/services/')
 def services():
     return render_template('services.html', services=SERVICES)
 
-@app.route('/blog')
+@app.route('/blog/')
 def blog():
     return render_template('blog.html', posts=BLOG_POSTS)
 
-@app.route('/blog/<int:post_id>')
+@app.route('/blog/<int:post_id>/')
 def blog_detail(post_id):
     post = next((p for p in BLOG_POSTS if p['id'] == post_id), None)
     if post is None:
         return render_template('404.html'), 404
     return render_template('blog_detail.html', post=post)
 
-@app.route('/contact', methods=['GET', 'POST'])
+@app.route('/contact/', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
         try:
