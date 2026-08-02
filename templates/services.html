@@ -1,42 +1,40 @@
 {% extends "base.html" %}
 
-{% block title %}Services - My Portfolio{% endblock %}
+{% block title %}Services - Ozair Ilyas{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <h1 class="mb-5 text-center">My Services</h1>
-    
-    <div class="row g-4">
-        {% for service in services %}
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm hover-card">
-                <div class="card-body text-center">
-                    <div class="service-icon mb-3">{{ service.icon|safe }}</div>
-                    <h5 class="card-title">{{ service.title }}</h5>
-                    <p class="card-text">{{ service.description }}</p>
-                    <a href="#" class="btn btn-primary btn-sm" onclick="requestService('{{ service.title }}'); return false;">Request Service</a>
+<section class="page-header">
+    <canvas class="ai-page-canvas"></canvas>
+    <div class="container" style="position:relative;z-index:1;">
+        <h1>My Services</h1>
+        <p>AI-powered solutions tailored to your needs</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            {% for service in services %}
+            <div class="col-md-6 col-lg-4 reveal delay-{{ loop.index % 4 + 1 }}">
+                <div class="gradient-border-card h-100">
+                    <div style="font-size:2.5rem; color:var(--accent); margin-bottom:1rem;">{{ service.icon|safe }}</div>
+                    <h5 style="color:var(--text-heading); margin-bottom:0.75rem;">{{ service.title }}</h5>
+                    <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:1.2rem;">{{ service.description }}</p>
+                    <a href="/contact/?subject={{ service.title|urlencode }}" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-paper-plane me-1"></i>Request Service
+                    </a>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
 
-    <div class="row mt-5">
-        <div class="col-lg-8 mx-auto">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h4 class="card-title mb-3">Interested in working together?</h4>
-                    <p class="card-text mb-4">Let's discuss your project and find the perfect solution for your needs.</p>
-                    <a href="/contact" class="btn btn-primary btn-lg">Start a Project</a>
-                </div>
-            </div>
+        <div class="cta-section mt-5 reveal">
+            <h3 class="mb-3" style="color:var(--text-heading);">Interested in Working Together?</h3>
+            <p class="mb-4" style="color:var(--text-secondary); max-width:500px; margin:0 auto;">Let's discuss your project and find the perfect AI solution for your needs.</p>
+            <a href="/contact/" class="btn btn-primary btn-lg">
+                <i class="fas fa-comments me-2"></i>Start a Project
+            </a>
         </div>
     </div>
-</div>
-
-<script>
-function requestService(service) {
-    alert('Thank you for your interest in: ' + service + '\n\nPlease fill out the contact form to discuss details.');
-}
-</script>
+</section>
 {% endblock %}

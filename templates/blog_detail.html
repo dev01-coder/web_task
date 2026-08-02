@@ -3,76 +3,79 @@
 {% block title %}{{ post.title }} - Blog{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <div class="row">
-        <div class="col-lg-8 mx-auto">
-            <a href="/blog" class="btn btn-outline-secondary mb-4">
-                <i class="fas fa-arrow-left"></i> Back to Blog
-            </a>
-            
-            <article>
-                <img src="{{ post.image }}" alt="{{ post.title }}" class="img-fluid rounded shadow mb-4 post-image">
-                
-                <h1 class="mb-2">{{ post.title }}</h1>
-                <small class="text-muted">By {{ post.author }} | {{ post.date }}</small>
-                
-                <hr class="my-4">
-                
-                <div class="blog-content">
-                    <p class="lead">{{ post.content }}</p>
-                    
-                    <h3>Key Takeaways</h3>
-                    <ul>
-                        <li>Understand the fundamentals of the topic</li>
-                        <li>Learn best practices from industry experts</li>
-                        <li>Apply the concepts to your projects</li>
-                        <li>Continue learning and improving</li>
-                    </ul>
-                    
-                    <h3>Conclusion</h3>
-                    <p>This article has covered the essential concepts you need to know. Remember to always stay updated with the latest 
-                    technologies and continue learning throughout your career.</p>
-                    
-                    <hr class="my-4">
-                    
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>Share this post:</strong>
-                            <a href="#" class="btn btn-sm btn-outline-primary me-2" title="Share on Twitter" onclick="shareOnTwitter(); return false;"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="btn btn-sm btn-outline-primary me-2" title="Share on LinkedIn" onclick="shareOnLinkedIn(); return false;"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="btn btn-sm btn-outline-primary" title="Share on Facebook" onclick="shareOnFacebook(); return false;"><i class="fab fa-facebook"></i></a>
+<section class="page-header">
+    <div class="container">
+        <h1>{{ post.title }}</h1>
+        <p>By {{ post.author }} | {{ post.date }}</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <a href="/blog/" class="btn btn-outline-secondary mb-4">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Blog
+                </a>
+
+                <article>
+                    <div style="border-radius:12px; overflow:hidden; margin-bottom:2rem;">
+                        <img src="{{ post.image }}" alt="{{ post.title }}" class="img-fluid w-100 post-image" loading="lazy">
+                    </div>
+
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <small style="color:var(--accent); font-family:'JetBrains Mono',monospace;">{{ post.date }}</small>
+                        <small style="color:var(--text-secondary);">|</small>
+                        <small style="color:var(--text-secondary);">By {{ post.author }}</small>
+                    </div>
+
+                    <div class="blog-content">
+                        <p style="font-size:1.1rem; line-height:1.9; color:var(--text-secondary);">{{ post.content }}</p>
+
+                        <h3>Key Takeaways</h3>
+                        <ul>
+                            {% for takeaway in post.key_takeaways %}
+                            <li>{{ takeaway }}</li>
+                            {% endfor %}
+                        </ul>
+
+                        <h3>Conclusion</h3>
+                        <p>{{ post.conclusion }}</p>
+
+                        <hr style="border-color:var(--border-color); margin:2rem 0;">
+
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                            <div class="d-flex align-items-center gap-2">
+                                <strong style="color:var(--text-heading);">Share this post:</strong>
+                                <a href="https://twitter.com/intent/tweet?text={{ post.title|urlencode }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary" title="Share on Twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url|urlencode }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary" title="Share on LinkedIn">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </article>
-            
-            <div class="card mt-5">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Like this post?</h5>
-                    <p class="card-text">Subscribe to get more articles like this delivered to your inbox.</p>
-                    <input type="email" class="form-control mb-2" placeholder="Your email">
-                    <button class="btn btn-primary" onclick="subscribeFromBlog()">Subscribe</button>
+                </article>
+
+                <div class="card mt-5">
+                    <div class="card-body text-center">
+                        <h5 class="card-title" style="color:var(--text-heading);">Enjoyed this article?</h5>
+                        <p class="card-text" style="color:var(--text-secondary);">Subscribe to get more articles like this delivered to your inbox.</p>
+                        <form id="blogSubscribeForm" data-netlify="true" netlify-honeypot="bot-field-blog-sub">
+                            <input type="hidden" name="form-name" value="blog-subscribe">
+                            <p class="d-none">
+                                <label>Don't fill this out: <input name="bot-field-blog-sub"></label>
+                            </p>
+                            <div class="d-flex gap-2 justify-content-center flex-wrap">
+                                <input type="email" class="form-control" name="email" placeholder="Your email address" style="max-width:300px;" required>
+                                <button type="submit" class="btn btn-primary">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<script>
-function shareOnTwitter() {
-    alert('Share on Twitter: {{ post.title }}');
-}
-
-function shareOnLinkedIn() {
-    alert('Share on LinkedIn: {{ post.title }}');
-}
-
-function shareOnFacebook() {
-    alert('Share on Facebook: {{ post.title }}');
-}
-
-function subscribeFromBlog() {
-    alert('Thank you for subscribing!');
-}
-</script>
+</section>
 {% endblock %}

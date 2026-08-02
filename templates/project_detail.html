@@ -1,61 +1,58 @@
 {% extends "base.html" %}
 
-{% block title %}{{ project.title }} - My Portfolio{% endblock %}
+{% block title %}{{ project.title }} - Ozair Ilyas{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <div class="row mb-5">
-        <div class="col-lg-8 mx-auto">
-            <a href="/projects" class="btn btn-outline-secondary mb-4">
-                <i class="fas fa-arrow-left"></i> Back to Projects
-            </a>
-            
-            <img src="{{ project.image }}" alt="{{ project.title }}" class="img-fluid rounded shadow mb-4">
-            
-            <h1 class="mb-3">{{ project.title }}</h1>
-            <p class="lead">{{ project.description }}</p>
-            
-            <h4 class="mt-4 mb-3">Technologies Used:</h4>
-            <div class="mb-4">
-                {% for tech in project.tech %}
-                <span class="badge bg-primary me-2 mb-2">{{ tech }}</span>
-                {% endfor %}
-            </div>
-            
-            <hr>
-            
-            <h4 class="mt-4 mb-3">Project Details</h4>
-            <p>This project showcases modern web development practices and best practices in creating scalable, maintainable code. 
-            The application demonstrates full-stack capabilities with both frontend and backend components working together seamlessly.</p>
-            
-            <h5>Key Features:</h5>
-            <ul>
-                <li>Responsive and mobile-friendly design</li>
-                <li>Clean, maintainable code structure</li>
-                <li>Efficient database optimization</li>
-                <li>RESTful API implementation</li>
-                <li>User-friendly interface</li>
-            </ul>
-            
-            <div class="mt-4">
-                <a href="#" onclick="viewProject('{{ project.title }}'); return false;" class="btn btn-primary btn-lg me-2">
-                    <i class="fas fa-external-link-alt"></i> View Live Project
+<section class="page-header">
+    <div class="container">
+        <h1>{{ project.title }}</h1>
+        <p>Project Details</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <a href="/projects/" class="btn btn-outline-secondary mb-4">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Projects
                 </a>
-                <a href="#" onclick="viewGitHub('{{ project.title }}'); return false;" class="btn btn-outline-primary btn-lg">
-                    <i class="fab fa-github"></i> View on GitHub
-                </a>
+
+                <div style="border-radius:12px; overflow:hidden; margin-bottom:2rem;">
+                    <img src="{{ project.image }}" alt="{{ project.title }}" class="img-fluid w-100" loading="lazy">
+                </div>
+
+                <h2 class="mb-3" style="color:var(--text-heading);">{{ project.title }}</h2>
+                <p style="color:var(--text-secondary); font-size:1.1rem; line-height:1.8;">{{ project.description }}</p>
+
+                <h4 class="mt-4 mb-3" style="color:var(--text-heading);">Technologies Used</h4>
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                    {% for tech in project.tech %}
+                    <span class="badge">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+
+                <hr style="border-color:var(--border-color);">
+
+                <h4 class="mt-4 mb-3" style="color:var(--text-heading);">Key Highlights</h4>
+                <ul style="color:var(--text-secondary); line-height:2;">
+                    {% for highlight in project.highlights %}
+                    <li>{{ highlight }}</li>
+                    {% endfor %}
+                </ul>
+
+                <div class="d-flex gap-3 mt-4 flex-wrap">
+                    <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+                        <i class="fab fa-github me-2"></i>View on GitHub
+                    </a>
+                    {% if project.live_url %}
+                    <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-external-link-alt me-2"></i>View Live Project
+                    </a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<script>
-function viewProject(title) {
-    alert('Live version of ' + title + ' would open here!');
-}
-
-function viewGitHub(title) {
-    alert('GitHub repository for ' + title + ' would open here!');
-}
-</script>
+</section>
 {% endblock %}

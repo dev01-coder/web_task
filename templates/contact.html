@@ -1,81 +1,91 @@
 {% extends "base.html" %}
 
-{% block title %}Contact - My Portfolio{% endblock %}
+{% block title %}Contact - Ozair Ilyas{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <h1 class="mb-5 text-center">Get In Touch</h1>
-    
-    <div class="row">
-        <div class="col-lg-8 mx-auto">
-            <div class="row mb-5">
-                <div class="col-md-4 text-center mb-4">
+<section class="page-header">
+    <canvas class="ai-page-canvas"></canvas>
+    <div class="container" style="position:relative;z-index:1;">
+        <h1>Get In Touch</h1>
+        <p>Let's discuss your next project</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-5 reveal">
+                <h3 class="mb-4" style="color:var(--text-heading);">Let's Talk</h3>
+                <p style="color:var(--text-secondary); margin-bottom:2rem;">
+                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                </p>
+
+                <div class="d-flex flex-column gap-3">
                     <div class="contact-info-card">
-                        <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
+                        <i class="fas fa-envelope"></i>
                         <h5>Email</h5>
-                        <p><a href="mailto:sardarozair13@gmail.com" class="text-decoration-none">sardarozair13@gmail.com</a></p>
+                        <p><a href="mailto:sardarozair13@gmail.com">sardarozair13@gmail.com</a></p>
                     </div>
-                </div>
-                <div class="col-md-4 text-center mb-4">
                     <div class="contact-info-card">
-                        <i class="fab fa-linkedin fa-2x text-primary mb-3"></i>
+                        <i class="fab fa-linkedin-in"></i>
                         <h5>LinkedIn</h5>
-                        <p><a href="https://pk.linkedin.com/in/ozair-ilyas" class="text-decoration-none">pk.linkedin.com/in/ozair-ilyas</a></p>
+                        <p><a href="https://pk.linkedin.com/in/ozair-ilyas" target="_blank" rel="noopener noreferrer">pk.linkedin.com/in/ozair-ilyas</a></p>
                     </div>
-                </div>
-                <div class="col-md-4 text-center mb-4">
                     <div class="contact-info-card">
-                        <i class="fab fa-github fa-2x text-primary mb-3"></i>
+                        <i class="fab fa-github"></i>
                         <h5>GitHub</h5>
-                        <p><a href="https://github.com" class="text-decoration-none" target="_blank" rel="noopener noreferrer">github.com/ozairilyas</a></p>
+                        <p><a href="https://github.com/dev01-coder" target="_blank" rel="noopener noreferrer">github.com/dev01-coder</a></p>
                     </div>
                 </div>
             </div>
-            
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h4 class="card-title mb-4">Send Me a Message</h4>
-                    
-                    <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                        <input type="hidden" name="form-name" value="contact">
-                        <p class="d-none">
-                            <label>Don't fill this out if you're human: <input name="bot-field"></label>
-                        </p>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Full Name *</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
 
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email Address *</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
+            <div class="col-lg-7 reveal delay-1">
+                <div class="card">
+                    <div class="card-body" style="padding:2rem;">
+                        <h4 class="mb-4" style="color:var(--text-heading);">Send Me a Message</h4>
 
-                        <div class="mb-3">
-                            <label for="subject" class="form-label">Subject</label>
-                            <input type="text" class="form-control" id="subject" name="subject">
-                        </div>
+                        <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                            <input type="hidden" name="form-name" value="contact">
+                            <p class="d-none">
+                                <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                            </p>
 
-                        <div class="mb-3">
-                            <label for="message" class="form-label">Message *</label>
-                            <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
-                        </div>
-
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="terms" required>
-                            <label class="form-check-label" for="terms">
-                                I agree to the privacy policy
-                            </label>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-lg w-100">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
-                    </form>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="John Doe" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="john@example.com" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Project Discussion">
+                                </div>
+                                <div class="col-12">
+                                    <label for="message" class="form-label">Message *</label>
+                                    <textarea class="form-control" id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="terms" required>
+                                        <label class="form-check-label" for="terms">
+                                            I agree to the <a href="#" style="color:var(--accent);">privacy policy</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                                        <i class="fas fa-paper-plane me-2"></i>Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
+</section>
 {% endblock %}

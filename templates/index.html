@@ -1,151 +1,158 @@
 {% extends "base.html" %}
 
-{% block title %}Home - My Portfolio{% endblock %}
+{% block title %}Ozair Ilyas - AI Engineer Portfolio{% endblock %}
 
 {% block content %}
-<div class="hero-section">
-    <div class="container h-100 d-flex align-items-center">
-        <div class="row w-100">
-            <div class="col-lg-8">
-                <h1 class="display-3 fw-bold mb-4">Hi, I'm Ozair Ilyas</h1>
-                <p class="lead mb-4">Jr. AI Engineer specializing in Healthcare AI, Machine Learning, and Large Language Models. Passionate about automating healthcare systems and leveraging AI for innovative solutions.</p>
-                <div>
-                    <a href="/projects" class="btn btn-primary btn-lg me-3">View My Work</a>
-                    <a href="/contact" class="btn btn-outline-light btn-lg">Get In Touch</a>
+<section class="hero-section" id="hero">
+    <canvas id="ai-canvas"></canvas>
+    <div class="container h-100 d-flex align-items-center" style="position:relative;z-index:1;">
+        <div class="row w-100 align-items-center">
+            <div class="col-lg-7 mb-5 mb-lg-0">
+                <p class="hero-greeting">Hello, my name is</p>
+                <h1>Ozair Ilyas</h1>
+                <p class="hero-subtitle">I'm a <span class="typing-text">Healthcare AI Specialist</span></p>
+                <p class="hero-description">Jr. AI Engineer specializing in Healthcare AI, Machine Learning, and Large Language Models. Passionate about building intelligent solutions that automate healthcare systems and drive innovation.</p>
+                <div class="hero-buttons">
+                    <a href="/projects/" class="btn btn-primary btn-lg">
+                        <i class="fas fa-code me-2"></i>View My Work
+                    </a>
+                    <a href="/contact/" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-envelope me-2"></i>Get In Touch
+                    </a>
+                </div>
+                <div class="hero-social">
+                    <a href="https://github.com/dev01-coder" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://pk.linkedin.com/in/ozair-ilyas" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:sardarozair13@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<section class="py-5">
-    <div class="container">
-        <h2 class="text-center mb-5">Featured Expertise</h2>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100 text-center hover-card">
-                    <div class="card-body">
-                        <div class="skill-icon mb-3"><i class="fas fa-brain fa-2x text-primary"></i></div>
-                        <h5 class="card-title">AI & Machine Learning</h5>
-                        <p class="card-text">LLMs, RAG, Prompt Engineering, Classification & Prediction</p>
-                        <a href="/services" class="btn btn-sm btn-primary">Learn More</a>
-                    </div>
-                </div>
+            <div class="col-lg-5 hero-profile-wrapper">
+                <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Ozair Ilyas - AI Engineer" class="hero-profile-img">
             </div>
-            <div class="col-md-4">
-                <div class="card h-100 text-center hover-card">
-                    <div class="card-body">
-                        <div class="skill-icon mb-3"><i class="fas fa-hospital fa-2x text-primary"></i></div>
-                        <h5 class="card-title">Healthcare AI</h5>
-                        <p class="card-text">Medical Coding, Claims Prediction, Healthcare Automation</p>
-                        <a href="/services" class="btn btn-sm btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100 text-center hover-card">
-                    <div class="card-body">
-                        <div class="skill-icon mb-3"><i class="fas fa-file-pdf fa-2x text-primary"></i></div>
-                        <h5 class="card-title">Document Processing</h5>
-                        <p class="card-text">OCR, Vision APIs, Data Extraction, NLP</p>
-                        <a href="/services" class="btn btn-sm btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-5">Recent Projects</h2>
-        <div class="row g-4">
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm hover-card">
-                    <img src="https://loremflickr.com/600/400/healthcare" class="card-img-top" alt="Project">
-                    <div class="card-body">
-                        <h5 class="card-title">AI Medical Coding Assistant</h5>
-                        <p class="card-text">LLM-powered system for predicting ICD, CPT, and Modifier codes from medical records</p>
-                        <a href="/project/1" class="btn btn-primary btn-sm">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm hover-card">
-                    <img src="https://loremflickr.com/600/400/ocr" class="card-img-top" alt="Project">
-                    <div class="card-body">
-                        <h5 class="card-title">AI-Powered HCFA OCR</h5>
-                        <p class="card-text">Automated data extraction from HCFA forms using OCR and Google Vision</p>
-                        <a href="/project/2" class="btn btn-primary btn-sm">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm hover-card">
-                    <img src="https://loremflickr.com/600/400/audio" class="card-img-top" alt="Project">
-                    <div class="card-body">
-                        <h5 class="card-title">AI Call Quality Auditor</h5>
-                        <p class="card-text">Speech-to-text and call evaluation system for quality assurance</p>
-                        <a href="/project/3" class="btn btn-primary btn-sm">View Details</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="text-center mt-5">
-            <a href="/projects" class="btn btn-primary btn-lg">View All Projects</a>
         </div>
     </div>
 </section>
 
 <section class="py-5">
     <div class="container">
-        <h2 class="text-center mb-5">Latest Blog Posts</h2>
-        <div class="row g-4">
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 hover-card">
-                    <img src="https://loremflickr.com/400/250/ai" class="card-img-top" alt="Blog">
-                    <div class="card-body">
-                        <small class="text-muted">Jan 20, 2026</small>
-                        <h5 class="card-title">Getting Started with Large Language Models</h5>
-                        <p class="card-text">Learn the fundamentals of LLMs, RAG, and how to integrate them...</p>
-                        <a href="/blog/1" class="btn btn-primary btn-sm">Read More</a>
+        <p class="section-subtitle reveal">Transforming ideas into intelligent solutions</p>
+        <h2 class="section-title reveal">Featured Expertise</h2>
+        <div class="section-divider reveal"></div>
+        <div class="row g-4 mt-3">
+            <div class="col-md-4 reveal delay-1">
+                <div class="glass-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-brain"></i>
                     </div>
+                    <h5>AI & Machine Learning</h5>
+                    <p>LLMs, RAG, Prompt Engineering, Classification & Predictive Analytics</p>
+                    <a href="/services/" class="btn btn-outline-primary btn-sm">Learn More</a>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 hover-card">
-                    <img src="https://loremflickr.com/400/250/health" class="card-img-top" alt="Blog">
-                    <div class="card-body">
-                        <small class="text-muted">Jan 18, 2026</small>
-                        <h5 class="card-title">Building Healthcare AI Solutions</h5>
-                        <p class="card-text">Insights into developing AI solutions for healthcare automation...</p>
-                        <a href="/blog/2" class="btn btn-primary btn-sm">Read More</a>
+            <div class="col-md-4 reveal delay-2">
+                <div class="glass-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-hospital"></i>
                     </div>
+                    <h5>Healthcare AI</h5>
+                    <p>Medical Coding, Claims Prediction, Healthcare Automation & Data Processing</p>
+                    <a href="/services/" class="btn btn-outline-primary btn-sm">Learn More</a>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 hover-card">
-                    <img src="https://loremflickr.com/400/250/document" class="card-img-top" alt="Blog">
-                    <div class="card-body">
-                        <small class="text-muted">Jan 15, 2026</small>
-                        <h5 class="card-title">OCR and Computer Vision for Document Processing</h5>
-                        <p class="card-text">Mastering document extraction and data recognition using OCR...</p>
-                        <a href="/blog/3" class="btn btn-primary btn-sm">Read More</a>
+            <div class="col-md-4 reveal delay-3">
+                <div class="glass-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-file-pdf"></i>
                     </div>
+                    <h5>Document Processing</h5>
+                    <p>OCR, Vision APIs, Data Extraction, NLP & Intelligent Document Automation</p>
+                    <a href="/services/" class="btn btn-outline-primary btn-sm">Learn More</a>
                 </div>
             </div>
-        </div>
-        <div class="text-center mt-5">
-            <a href="/blog" class="btn btn-primary btn-lg">View All Posts</a>
         </div>
     </div>
 </section>
 
-<section class="py-5 bg-primary text-white">
-    <div class="container text-center">
-        <h2 class="mb-4">Ready to work together?</h2>
-        <p class="lead mb-4">Let's create something amazing. Get in touch with me today.</p>
-        <a href="/contact" class="btn btn-light btn-lg">Contact Me Now</a>
+<section class="py-5">
+    <div class="container">
+        <p class="section-subtitle reveal">Some of my recent work</p>
+        <h2 class="section-title reveal">Recent Projects</h2>
+        <div class="section-divider reveal"></div>
+        <div class="row g-4 mt-3">
+            {% for project in projects[:3] %}
+            <div class="col-md-6 col-lg-4 reveal delay-{{ loop.index }}">
+                <div class="card h-100 project-card" data-category="{{ project.category }}">
+                    <div style="overflow:hidden; border-radius:12px 12px 0 0;">
+                        <img src="{{ project.image }}" class="card-img-top" alt="{{ project.title }}" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.description }}</p>
+                    </div>
+                    <div class="card-footer" style="background:transparent; border-top:1px solid var(--border-color);">
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            {% for tech in project.tech[:4] %}
+                            <span class="badge">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        <a href="/project/{{ project.id }}/" class="btn btn-primary btn-sm w-100">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5 reveal">
+            <a href="/projects/" class="btn btn-primary btn-lg">
+                <i class="fas fa-folder-open me-2"></i>View All Projects
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <p class="section-subtitle reveal">Insights and tutorials</p>
+        <h2 class="section-title reveal">Latest Blog Posts</h2>
+        <div class="section-divider reveal"></div>
+        <div class="row g-4 mt-3">
+            {% for post in posts[:3] %}
+            <div class="col-md-6 col-lg-4 reveal delay-{{ loop.index }}">
+                <div class="card h-100">
+                    <div style="overflow:hidden; border-radius:12px 12px 0 0;">
+                        <img src="{{ post.image }}" class="card-img-top blog-post-image" alt="{{ post.title }}" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <small style="color:var(--accent); font-family:'JetBrains Mono',monospace;">{{ post.date }}</small>
+                        <h5 class="card-title mt-2">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.excerpt }}</p>
+                        <a href="/blog/{{ post.id }}/" class="btn btn-outline-primary btn-sm">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5 reveal">
+            <a href="/blog/" class="btn btn-primary btn-lg">
+                <i class="fas fa-rss me-2"></i>View All Posts
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="cta-section reveal">
+            <h2 class="mb-3" style="color:var(--text-heading);">Ready to Work Together?</h2>
+            <p class="mb-4" style="color:var(--text-secondary); max-width:500px; margin:0 auto;">Let's build something amazing. I'm always open to discussing new projects and opportunities.</p>
+            <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a href="/contact/" class="btn btn-primary btn-lg">
+                    <i class="fas fa-paper-plane me-2"></i>Contact Me
+                </a>
+                <a href="/download-cv" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-download me-2"></i>Download CV
+                </a>
+            </div>
+        </div>
     </div>
 </section>
 {% endblock %}

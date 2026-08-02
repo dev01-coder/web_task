@@ -5,9 +5,6 @@ import logging
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-change-in-production')
-app.config['JSON_SORT_KEYS'] = False
-
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -15,31 +12,105 @@ logger = logging.getLogger(__name__)
 PROJECTS = [
     {
         'id': 1,
-        'title': 'AI Medical Coding Assistant',
-        'description': 'Developed an AI Medical Coding Assistant using LLM to predict ICD, CPT, and Modifier codes with RAG and OCR for processing medical documents',
-        'tech': ['Python', 'Flask', 'Langchain', 'MySQL', 'Docker', 'Azure'],
-        'image': 'https://loremflickr.com/600/400/healthcare'
+        'title': 'Resume Analyzer AI',
+        'description': 'AI-powered resume analysis tool using Groq\'s LLM API (Llama 3.3 70B). Provides ATS match scoring, keyword gap analysis, skill gap prioritization, and actionable improvement tips.',
+        'tech': ['Python', 'FastAPI', 'Streamlit', 'Groq', 'SQLite', 'Plotly'],
+        'image': 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=500&fit=crop',
+        'github_url': 'https://github.com/dev01-coder/Resume-Analyzer-AI',
+        'live_url': '',
+        'category': 'ai,ml',
+        'highlights': [
+            'LLM-powered ATS scoring with Llama 3.3 70B via Groq API',
+            'Real-time keyword gap analysis and skill prioritization',
+            'PDF and DOCX resume parsing with structured output',
+            'Analytics dashboard with score trends and history tracking',
+            'Full REST API with SQLite persistence and export capabilities'
+        ]
     },
     {
         'id': 2,
-        'title': 'AI-Powered HCFA OCR',
-        'description': 'Web application to automate data extraction from HCFA forms using OCR technology, extracting billing details and eliminating manual data entry',
-        'tech': ['Python', 'Gemini', 'Flask', 'Google Vision', 'Azure'],
-        'image': 'https://loremflickr.com/600/400/ocr'
+        'title': 'AI Invoice Processor',
+        'description': 'Full-stack AI invoice processing system with OCR extraction, NLP-based field parsing, ML classification, and anomaly detection.',
+        'tech': ['Python', 'FastAPI', 'Streamlit', 'Tesseract', 'scikit-learn', 'Docker'],
+        'image': 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=500&fit=crop',
+        'github_url': 'https://github.com/dev01-coder/ai-invoice-processor',
+        'live_url': '',
+        'category': 'ai,ml',
+        'highlights': [
+            'Tesseract OCR for PDF and image text extraction',
+            'NLP-based field parsing with fallback vendor extraction',
+            'TF-IDF + Random Forest invoice classification pipeline',
+            'Isolation Forest anomaly detection for suspicious invoices',
+            'Docker-ready deployment with async SQLAlchemy database'
+        ]
     },
     {
         'id': 3,
-        'title': 'AI Call Quality Auditor',
-        'description': 'System for transcribing speech to text and evaluating calls for grammar, tone, and communication standards using LLMs',
-        'tech': ['Python', 'Gemini', 'Flask', 'Whisper', 'Azure'],
-        'image': 'https://loremflickr.com/600/400/audio'
+        'title': 'ArticleBot: Article Research Tool',
+        'description': 'Intelligent document analysis and Q&A application using LLMs and vector embeddings. Provide any article URL, ask natural language questions, and get accurate answers with source citations.',
+        'tech': ['Python', 'LangChain', 'OpenAI', 'FAISS', 'Streamlit', 'Selenium'],
+        'image': 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&h=500&fit=crop',
+        'github_url': 'https://github.com/dev01-coder/article-bot',
+        'live_url': '',
+        'category': 'ai,nlp',
+        'highlights': [
+            'Selenium-based web scraping for dynamic article content',
+            'OpenAI embeddings with FAISS vector similarity search',
+            'LangChain orchestration for intelligent Q&A workflows',
+            'Source attribution with citations for every answer',
+            'Persistent vector storage to avoid re-processing costs'
+        ]
     },
     {
         'id': 4,
+        'title': 'AI-Powered HCFA OCR',
+        'description': 'Web application to automate data extraction from HCFA forms using OCR technology, extracting billing details and eliminating manual data entry.',
+        'tech': ['Python', 'Gemini', 'Flask', 'Google Vision', 'Azure'],
+        'image': 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop',
+        'github_url': 'https://github.com/dev01-coder',
+        'live_url': '',
+        'category': 'ai,healthcare',
+        'highlights': [
+            'Google Vision API for high-accuracy OCR extraction',
+            'Automated billing field parsing from HCFA forms',
+            'Eliminates manual data entry with 95%+ accuracy',
+            'Cloud deployment on Azure for scalability',
+            'Real-world healthcare billing automation'
+        ]
+    },
+    {
+        'id': 5,
+        'title': 'AI Medical Coding Assistant',
+        'description': 'LLM-powered system for predicting ICD, CPT, and Modifier codes from medical records using RAG and OCR for processing medical documents.',
+        'tech': ['Python', 'Flask', 'Langchain', 'MySQL', 'Docker', 'Azure'],
+        'image': 'https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=800&h=500&fit=crop',
+        'github_url': 'https://github.com/dev01-coder',
+        'live_url': '',
+        'category': 'ai,healthcare',
+        'highlights': [
+            'RAG-based retrieval for accurate medical code prediction',
+            'Multi-code output: ICD, CPT, and Modifier codes',
+            'OCR integration for processing scanned medical records',
+            'Docker containerized deployment with MySQL backend',
+            'Reduces coding time from hours to minutes'
+        ]
+    },
+    {
+        'id': 6,
         'title': 'Claim Denial Prediction System',
-        'description': 'Machine learning system to forecast acceptance or rejection of claims based on 837 data using Random Forest, Neural Networks, and Decision Trees',
+        'description': 'Machine learning system to forecast acceptance or rejection of claims based on 837 data using Random Forest, Neural Networks, and Decision Trees.',
         'tech': ['Python', 'Gemini', 'Flask', 'Google Vision', 'Azure', 'ML'],
-        'image': 'https://loremflickr.com/600/400/machine,learning'
+        'image': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop',
+        'github_url': 'https://github.com/dev01-coder',
+        'live_url': '',
+        'category': 'ai,ml',
+        'highlights': [
+            'Multi-model comparison: Random Forest, Neural Networks, Decision Trees',
+            '837 data parsing for claims feature engineering',
+            'Proactive denial prediction before claim submission',
+            'Azure cloud deployment for production scalability',
+            'Reduces claim denial rates with data-driven insights'
+        ]
     }
 ]
 
@@ -65,8 +136,15 @@ BLOG_POSTS = [
         'author': 'Ozair Ilyas',
         'date': 'Jan 20, 2026',
         'excerpt': 'Learn the fundamentals of LLMs, RAG, and how to integrate them into your applications.',
-        'content': 'Large Language Models have revolutionized AI development. In this comprehensive guide, we explore LLM basics, Retrieval-Augmented Generation (RAG), prompt engineering, and practical integration patterns...',
-        'image': 'https://loremflickr.com/600/400/ai'
+        'content': 'Large Language Models have revolutionized AI development. In this comprehensive guide, we explore LLM basics, Retrieval-Augmented Generation (RAG), prompt engineering, and practical integration patterns.',
+        'key_takeaways': [
+            'LLMs like GPT and Llama process text using transformer architecture with attention mechanisms',
+            'RAG combines retrieval systems with generative models to ground responses in real data',
+            'Prompt engineering is the skill of crafting inputs that guide LLMs toward accurate outputs',
+            'Fine-tuning on domain-specific data dramatically improves model performance for specialized tasks'
+        ],
+        'conclusion': 'LLMs are powerful tools when used correctly. Start with prompt engineering, graduate to RAG for knowledge-heavy tasks, and fine-tune only when necessary. The key is understanding trade-offs between cost, latency, and accuracy.',
+        'image': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop'
     },
     {
         'id': 2,
@@ -74,8 +152,15 @@ BLOG_POSTS = [
         'author': 'Ozair Ilyas',
         'date': 'Jan 18, 2026',
         'excerpt': 'Insights into developing AI solutions for medical coding, claims processing, and healthcare automation.',
-        'content': 'Healthcare AI presents unique challenges and opportunities. This post covers medical data handling, HIPAA considerations, and building robust healthcare AI systems using Python and cloud services...',
-        'image': 'https://loremflickr.com/600/400/health'
+        'content': 'Healthcare AI presents unique challenges and opportunities. This post covers medical data handling, HIPAA considerations, and building robust healthcare AI systems using Python and cloud services.',
+        'key_takeaways': [
+            'Healthcare data requires strict HIPAA compliance with encryption at rest and in transit',
+            'Medical coding automation using LLMs can reduce coding time from hours to minutes',
+            'Claims prediction models help healthcare providers proactively manage revenue cycles',
+            'OCR + NLP pipelines extract structured data from unstructured medical documents'
+        ],
+        'conclusion': 'Healthcare AI is not just about technology — it is about understanding clinical workflows, regulatory requirements, and the real impact on patient outcomes. Start with high-value, low-risk automation tasks.',
+        'image': 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=400&fit=crop'
     },
     {
         'id': 3,
@@ -83,8 +168,15 @@ BLOG_POSTS = [
         'author': 'Ozair Ilyas',
         'date': 'Jan 15, 2026',
         'excerpt': 'Mastering document extraction and data recognition using OCR and Google Vision API.',
-        'content': 'Automating document processing is crucial for many industries. Learn how to use Google Vision, OpenCV, and modern OCR techniques to extract and validate data from medical forms, receipts, and documents...',
-        'image': 'https://loremflickr.com/600/400/document'
+        'content': 'Automating document processing is crucial for many industries. Learn how to use Google Vision, OpenCV, and modern OCR techniques to extract and validate data from medical forms, receipts, and documents.',
+        'key_takeaways': [
+            'Google Vision API achieves 95%+ accuracy on printed text extraction from scanned documents',
+            'Pre-processing steps like deskewing, denoising, and binarization significantly improve OCR results',
+            'Combining OCR with NLP enables intelligent field extraction from unstructured documents',
+            'Confidence scoring helps identify low-quality extractions that need manual review'
+        ],
+        'conclusion': 'OCR technology has matured significantly. The real value comes from combining it with NLP for intelligent document understanding, not just text extraction. Focus on the end-to-end pipeline.',
+        'image': 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&h=400&fit=crop'
     },
     {
         'id': 4,
@@ -92,13 +184,17 @@ BLOG_POSTS = [
         'author': 'Ozair Ilyas',
         'date': 'Jan 12, 2026',
         'excerpt': 'Using Random Forest, Neural Networks, and Decision Trees for claims prediction and business intelligence.',
-        'content': 'Predictive analytics can significantly impact business outcomes. Explore machine learning algorithms, feature engineering, model evaluation, and deployment strategies for production systems...',
-        'image': 'https://loremflickr.com/600/400/data'
+        'content': 'Predictive analytics can significantly impact business outcomes. Explore machine learning algorithms, feature engineering, model evaluation, and deployment strategies for production systems.',
+        'key_takeaways': [
+            'Random Forest and XGBoost consistently outperform deep learning on structured/tabular data',
+            'Feature engineering is more important than model selection for most real-world problems',
+            'Cross-validation and proper train/test splits prevent overfitting and give honest performance estimates',
+            'Model explainability with SHAP values builds trust with non-technical stakeholders'
+        ],
+        'conclusion': 'Start simple, validate rigorously, and only increase complexity when justified by data. The best model is the one that solves the business problem, not necessarily the most sophisticated one.',
+        'image': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop'
     }
 ]
-
-# Testimonials data
-TESTIMONIALS = []
 
 # Services data - Updated with AI services
 SERVICES = [
@@ -149,7 +245,7 @@ def favicon():
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', projects=PROJECTS, posts=BLOG_POSTS)
 
 @app.route('/about/')
 def about():
@@ -209,21 +305,13 @@ def contact():
             return jsonify({'status': 'error', 'message': 'Server error'}), 500
     return render_template('contact.html')
 
-@app.route('/api/messages')
-def get_messages():
-    return jsonify(MESSAGES)
-
-@app.route('/api/projects')
-def api_projects():
-    return jsonify(PROJECTS)
-
-@app.route('/api/blog')
-def api_blog():
-    return jsonify(BLOG_POSTS)
-
 @app.route('/download-cv')
 def download_cv():
-    return jsonify({'status': 'success', 'message': 'CV download link prepared', 'link': '#'})
+    cv_path = os.path.join(app.static_folder, 'files', 'Ozair_Ilyas_CV.pdf')
+    if os.path.exists(cv_path):
+        from flask import send_file
+        return send_file(cv_path, as_attachment=True, download_name='Ozair_Ilyas_CV.pdf')
+    return jsonify({'status': 'error', 'message': 'CV file not found'}), 404
 
 @app.errorhandler(404)
 def not_found(error):

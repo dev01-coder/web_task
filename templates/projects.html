@@ -1,37 +1,56 @@
 {% extends "base.html" %}
 
-{% block title %}Projects - My Portfolio{% endblock %}
+{% block title %}Projects - Ozair Ilyas{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <h1 class="mb-5 text-center">My Projects</h1>
-    
-    <div class="row g-4">
-        {% for project in projects %}
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm hover-card">
-                <img src="{{ project.image }}" class="card-img-top" alt="{{ project.title }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ project.title }}</h5>
-                    <p class="card-text">{{ project.description }}</p>
-                </div>
-                <div class="card-footer bg-light">
-                    <div class="d-flex flex-wrap gap-2 mb-3">
-                        {% for tech in project.tech %}
-                        <span class="badge bg-primary">{{ tech }}</span>
-                        {% endfor %}
+<section class="page-header">
+    <canvas class="ai-page-canvas"></canvas>
+    <div class="container" style="position:relative;z-index:1;">
+        <h1>My Projects</h1>
+        <p>AI-powered solutions for healthcare and beyond</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="filter-buttons reveal">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="ai">AI / LLM</button>
+            <button class="filter-btn" data-filter="healthcare">Healthcare</button>
+            <button class="filter-btn" data-filter="ml">Machine Learning</button>
+        </div>
+
+        <div class="row g-4">
+            {% for project in projects %}
+            <div class="col-md-6 col-lg-4 reveal delay-{{ loop.index % 4 + 1 }}">
+                <div class="card h-100 project-card" data-category="{{ project.category }}">
+                    <div style="overflow:hidden; border-radius:12px 12px 0 0;">
+                        <img src="{{ project.image }}" class="card-img-top" alt="{{ project.title }}" loading="lazy">
                     </div>
-                    <a href="/project/{{ project.id }}" class="btn btn-primary btn-sm w-100">View Details</a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.description }}</p>
+                    </div>
+                    <div class="card-footer" style="background:transparent; border-top:1px solid var(--border-color);">
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            {% for tech in project.tech %}
+                            <span class="badge">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        <a href="/project/{{ project.id }}/" class="btn btn-primary btn-sm w-100">View Details</a>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
 
-    <div class="text-center mt-5">
-        <h3>Have a project in mind?</h3>
-        <p class="lead">Let's discuss how I can help bring your vision to life.</p>
-        <a href="/contact" class="btn btn-primary btn-lg">Get In Touch</a>
+        <div class="cta-section mt-5 reveal">
+            <h3 class="mb-3" style="color:var(--text-heading);">Have a project in mind?</h3>
+            <p class="mb-4" style="color:var(--text-secondary);">Let's discuss how I can help bring your vision to life.</p>
+            <a href="/contact/" class="btn btn-primary btn-lg">
+                <i class="fas fa-paper-plane me-2"></i>Get In Touch
+            </a>
+        </div>
     </div>
-</div>
+</section>
 {% endblock %}
