@@ -53,6 +53,18 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // === Close Mobile Nav on Close Button Click ===
+    var navCloseBtn = document.getElementById('navCloseBtn');
+    if (navCloseBtn) {
+        navCloseBtn.addEventListener('click', function () {
+            var collapseEl = document.getElementById('navbarNav');
+            if (collapseEl) {
+                var bsCollapse = bootstrap.Collapse.getInstance(collapseEl);
+                if (bsCollapse) bsCollapse.hide();
+            }
+        });
+    }
+
     // === Back to Top Button ===
     var backToTop = document.getElementById('backToTop');
     function handleBackToTop() {
@@ -523,6 +535,173 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize all AI canvases
     var allCanvases = document.querySelectorAll('#ai-canvas, .ai-page-canvas');
     allCanvases.forEach(function (c) { initAICanvas(c); });
+
+    // === Profile Neural Network Canvas ===
+    function initProfileCanvas() {
+        var canvas = document.getElementById('profile-canvas');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        var isMobile = window.innerWidth < 768;
+
+        function getTheme() {
+            return document.documentElement.getAttribute('data-theme') || 'dark';
+        }
+
+        function getProfileColors() {
+            var theme = getTheme();
+            if (theme === 'light') {
+                return {
+                    node: [14, 165, 233],
+                    nodeGlow: [56, 189, 248],
+                    connection: [14, 165, 233],
+                    orbit: [14, 165, 233]
+                };
+            }
+            return {
+                node: [100, 255, 218],
+                nodeGlow: [100, 255, 218],
+                connection: [100, 255, 218],
+                orbit: [100, 255, 218]
+            };
+        }
+
+        var colors = getProfileColors();
+        var themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function () {
+                setTimeout(function () { colors = getProfileColors(); }, 50);
+            });
+        }
+
+        function rgba(rgb, a) {
+            return 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + a + ')';
+        }
+
+        function resize() {
+            var wrapper = canvas.parentElement;
+            var dpr = window.devicePixelRatio || 1;
+            canvas.width = wrapper.offsetWidth * dpr;
+            canvas.height = wrapper.offsetHeight * dpr;
+            ctx.scale(dpr, dpr);
+            canvas.style.width = wrapper.offsetWidth + 'px';
+            canvas.style.height = wrapper.offsetHeight + 'px';
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        var W = function () { return canvas.width / (window.devicePixelRatio || 1); };
+        var H = function () { return canvas.height / (window.devicePixelRatio || 1); };
+        var centerX = function () { return W() / 2; };
+        var centerY = function () { return H() / 2; };
+
+        var nodeCount = isMobile ? 18 : 30;
+        var nodes = [];
+
+        function initNodes() {
+            nodes = [];
+            for (var i = 0; i < nodeCount; i++) {
+                var angle = (Math.PI * 2 / nodeCount) * i;
+                var radius = 80 + Math.random() * 60;
+                nodes.push({
+                    angle: angle,
+                    radius: radius,
+                    speed: 0.003 + Math.random() * 0.006,
+                    size: 1.5 + Math.random() * 2,
+                    pulse: Math.random() * Math.PI * 2,
+                    drift: (Math.random() - 0.5) * 0.5
+                });
+            }
+        }
+        initNodes();
+
+        var mouseX = -1000, mouseY = -1000;
+        canvas.parentElement.addEventListener('mousemove', function (e) {
+            var rect = canvas.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+        });
+        canvas.parentElement.addEventListener('mouseleave', function () {
+            mouseX = -1000; mouseY = -1000;
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, W(), H());
+
+            var cx = centerX();
+            var cy = centerY();
+
+            // Draw orbital rings
+            ctx.strokeStyle = rgba(colors.orbit, 0.06);
+            ctx.lineWidth = 0.5;
+            for (var r = 80; r <= 140; r += 20) {
+                ctx.beginPath();
+                ctx.arc(cx, cy, r, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            // Update and get node positions
+            var positions = [];
+            for (var i = 0; i < nodes.length; i++) {
+                var n = nodes[i];
+                n.angle += n.speed;
+                n.pulse += 0.02;
+                var x = cx + Math.cos(n.angle) * n.radius + Math.sin(n.pulse) * n.drift;
+                var y = cy + Math.sin(n.angle) * n.radius + Math.cos(n.pulse) * n.drift;
+                positions.push({ x: x, y: y, size: n.size, pulse: n.pulse });
+
+                // Mouse repulsion
+                var dx = x - mouseX, dy = y - mouseY;
+                var dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 80) {
+                    var force = (80 - dist) / 80 * 2;
+                    positions[i].x += (dx / dist) * force;
+                    positions[i].y += (dy / dist) * force;
+                }
+            }
+
+            // Draw connections
+            for (var i = 0; i < positions.length; i++) {
+                for (var j = i + 1; j < positions.length; j++) {
+                    var dx = positions[i].x - positions[j].x;
+                    var dy = positions[i].y - positions[j].y;
+                    var dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 100) {
+                        var alpha = (1 - dist / 100) * 0.2;
+                        ctx.beginPath();
+                        ctx.strokeStyle = rgba(colors.connection, alpha);
+                        ctx.lineWidth = 0.6;
+                        ctx.moveTo(positions[i].x, positions[i].y);
+                        ctx.lineTo(positions[j].x, positions[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Draw nodes
+            for (var i = 0; i < positions.length; i++) {
+                var p = positions[i];
+                var glow = Math.sin(p.pulse) * 0.5 + 0.5;
+                var r = p.size + glow * 1.5;
+
+                // Glow
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, r + 4, 0, Math.PI * 2);
+                ctx.fillStyle = rgba(colors.nodeGlow, glow * 0.15);
+                ctx.fill();
+
+                // Core
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+                ctx.fillStyle = rgba(colors.node, 0.5 + glow * 0.3);
+                ctx.fill();
+            }
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+    }
+
+    initProfileCanvas();
 
     // === Project Filter (for Projects page) ===
     var filterBtns = document.querySelectorAll('.filter-btn');

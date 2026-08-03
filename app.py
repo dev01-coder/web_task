@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 def inject_year():
     return {'now': datetime.now()}
 
-# Sample projects data - Updated with Ozair's projects
+# Sample projects data - Updated with Ozair Ilyas's projects
 PROJECTS = [
     {
         'id': 1,
@@ -118,7 +118,7 @@ PROJECTS = [
     }
 ]
 
-# Skills data - Updated with Ozair's skills
+# Skills data - Updated with Ozair Ilyas's skills
 SKILLS = [
     {'name': 'Python', 'level': 95},
     {'name': 'SQL', 'level': 90},

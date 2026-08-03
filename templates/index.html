@@ -14,7 +14,7 @@
                 <p class="hero-description">Jr. AI Engineer specializing in Healthcare AI, Machine Learning, and Large Language Models. Passionate about building intelligent solutions that automate healthcare systems and drive innovation.</p>
                 <div class="hero-buttons">
                     <a href="/projects/" class="btn btn-primary btn-lg">
-                        <i class="fas fa-code me-2"></i>View My Work
+                        <i class="fas fa-laptop-code me-2"></i>View My Work
                     </a>
                     <a href="/contact/" class="btn btn-outline-primary btn-lg">
                         <i class="fas fa-envelope me-2"></i>Get In Touch
@@ -27,7 +27,10 @@
                 </div>
             </div>
             <div class="col-lg-5 hero-profile-wrapper">
-                <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Ozair Ilyas - AI Engineer" class="hero-profile-img">
+                <div class="profile-canvas-wrapper">
+                    <canvas id="profile-canvas"></canvas>
+                    <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Ozair Ilyas - AI Engineer" class="hero-profile-img">
+                </div>
             </div>
         </div>
     </div>
@@ -135,7 +138,7 @@
         </div>
         <div class="text-center mt-5 reveal">
             <a href="/blog/" class="btn btn-primary btn-lg">
-                <i class="fas fa-rss me-2"></i>View All Posts
+                <i class="fas fa-book-open me-2"></i>View All Posts
             </a>
         </div>
     </div>
