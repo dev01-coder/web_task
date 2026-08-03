@@ -6,10 +6,53 @@
     <meta name="description" content="Ozair Ilyas - Jr. AI Engineer specializing in Healthcare AI, Machine Learning, LLMs, and Intelligent Automation Solutions.">
     <meta name="keywords" content="AI Engineer, Machine Learning, Healthcare AI, LLM, Python, Flask, Ozair Ilyas">
     <meta name="author" content="Ozair Ilyas">
+    <title>{% block title %}Ozair Ilyas - AI Engineer Portfolio{% endblock %}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="/static/images/profile.jpg">
+
+    <!-- Open Graph -->
     <meta property="og:title" content="Ozair Ilyas - AI Engineer Portfolio">
     <meta property="og:description" content="Jr. AI Engineer specializing in Healthcare AI, Machine Learning, and LLMs.">
     <meta property="og:type" content="website">
-    <title>{% block title %}Ozair Ilyas - AI Engineer Portfolio{% endblock %}</title>
+    <meta property="og:url" content="https://ozair-portfolio.netlify.app">
+    <meta property="og:image" content="https://ozair-portfolio.netlify.app/static/images/profile.jpg">
+    <meta property="og:site_name" content="Ozair Ilyas - AI Engineer">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ozair Ilyas - AI Engineer Portfolio">
+    <meta name="twitter:description" content="Jr. AI Engineer specializing in Healthcare AI, Machine Learning, and LLMs.">
+    <meta name="twitter:image" content="https://ozair-portfolio.netlify.app/static/images/profile.jpg">
+
+    <!-- Google Analytics -->
+    <!-- Replace G-XXXXXXXXXX with your real GA4 Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ozair Ilyas",
+        "url": "https://ozair-portfolio.netlify.app",
+        "image": "https://ozair-portfolio.netlify.app/static/images/profile.jpg",
+        "jobTitle": "Jr. AI Engineer",
+        "description": "Jr. AI Engineer specializing in Healthcare AI, Machine Learning, LLMs, and Intelligent Automation Solutions.",
+        "sameAs": [
+            "https://github.com/dev01-coder",
+            "https://pk.linkedin.com/in/ozair-ilyas"
+        ],
+        "email": "sardarozair13@gmail.com"
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -26,10 +69,15 @@
 <body>
     <nav class="navbar navbar-expand-lg sticky-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="/" title="Home"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="navbar-left d-flex align-items-center gap-2">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun icon-sun"></i>
+                    <i class="fas fa-moon icon-moon"></i>
+                </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
@@ -38,12 +86,6 @@
                     <li class="nav-item"><a class="nav-link" href="/projects/">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="/blog/">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="/contact/">Contact</a></li>
-                    <li class="nav-item ms-lg-2">
-                        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                            <i class="fas fa-sun icon-sun"></i>
-                            <i class="fas fa-moon icon-moon"></i>
-                        </button>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -93,7 +135,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Ozair Ilyas. All rights reserved.</p>
+                <p>&copy; {{ now.year }} Ozair Ilyas. All rights reserved.</p>
             </div>
         </div>
     </footer>

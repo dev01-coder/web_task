@@ -8,6 +8,10 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-change-
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+@app.context_processor
+def inject_year():
+    return {'now': datetime.now()}
+
 # Sample projects data - Updated with Ozair's projects
 PROJECTS = [
     {
@@ -312,6 +316,14 @@ def download_cv():
         from flask import send_file
         return send_file(cv_path, as_attachment=True, download_name='Ozair_Ilyas_CV.pdf')
     return jsonify({'status': 'error', 'message': 'CV file not found'}), 404
+
+@app.route('/thank-you/')
+def thank_you():
+    return render_template('thank-you.html')
+
+@app.route('/privacy-policy/')
+def privacy_policy():
+    return render_template('privacy-policy.html')
 
 @app.errorhandler(404)
 def not_found(error):

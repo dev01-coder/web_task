@@ -41,6 +41,16 @@ def contact():
 
 
 @freezer.register_generator
+def thank_you():
+    yield {}
+
+
+@freezer.register_generator
+def privacy_policy():
+    yield {}
+
+
+@freezer.register_generator
 def project_detail():
     """Generate URLs for all project detail pages."""
     for project in PROJECTS:
@@ -77,5 +87,14 @@ if __name__ == '__main__':
         resp = client.get('/nonexistent-page-for-404')
         with open(os.path.join(build_dir, '404.html'), 'wb') as f:
             f.write(resp.data)
+
+    # Copy robots.txt and sitemap.xml to build root
+    static_dir = os.path.join(os.path.dirname(__file__), 'static')
+    for filename in ['robots.txt', 'sitemap.xml']:
+        src = os.path.join(static_dir, filename)
+        dst = os.path.join(build_dir, filename)
+        if os.path.exists(src):
+            shutil.copy2(src, dst)
+            print(f"Copied {filename} to build directory")
 
     print("Static site built successfully in 'build' directory!")

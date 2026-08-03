@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy - Ozair Ilyas{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <canvas class="ai-page-canvas"></canvas>
+    <div class="container" style="position:relative;z-index:1;">
+        <h1>Privacy Policy</h1>
+        <p>Last updated: {{ now.strftime('%B %d, %Y') }}</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 reveal">
+                <div class="card" style="padding: 2.5rem;">
+                    <h3 class="mb-4" style="color: var(--text-heading);">Introduction</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        This Privacy Policy describes how Ozair Ilyas ("I", "me", or "my") collects, uses, and protects any information that you provide when you visit this portfolio website. Your privacy is important to me, and I am committed to safeguarding your personal data.
+                    </p>
+
+                    <h3 class="mt-5 mb-3" style="color: var(--text-heading);">Information I Collect</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        I may collect the following information when you use the contact form on this website:
+                    </p>
+                    <ul style="color: var(--text-secondary); line-height: 2;">
+                        <li>Your name</li>
+                        <li>Your email address</li>
+                        <li>Your message content</li>
+                    </ul>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Additionally, this website uses Google Analytics which collects anonymized data such as your browser type, device information, pages visited, and time spent on the site. This data is aggregated and does not personally identify you.
+                    </p>
+
+                    <h3 class="mt-5 mb-3" style="color: var(--text-heading);">How I Use Your Information</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        I use the information I collect for the following purposes:
+                    </p>
+                    <ul style="color: var(--text-secondary); line-height: 2;">
+                        <li>To respond to your inquiries and messages</li>
+                        <li>To improve this website and its content</li>
+                        <li>To analyze website traffic and usage patterns (via Google Analytics)</li>
+                    </ul>
+
+                    <h3 class="mt-5 mb-3" style="color: var(--text-heading);">Data Security</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        I am committed to ensuring that your information is secure. Contact form submissions are processed through Netlify Forms, which employs industry-standard security measures. However, no method of electronic transmission or storage is 100% secure, and I cannot guarantee absolute security.
+                    </p>
+
+                    <h3 class="mt-5 mb-3" style="color: var(--text-heading);">Third-Party Services</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        This website uses the following third-party services:
+                    </p>
+                    <ul style="color: var(--text-secondary); line-height: 2;">
+                        <li><strong>Netlify</strong> - Website hosting and form processing</li>
+                        <li><strong>Google Analytics</strong> - Website traffic analysis</li>
+                        <li><strong>Google Fonts</strong> - Font delivery</li>
+                        <li><strong>Font Awesome</strong> - Icon library</li>
+                        <li><strong>Bootstrap CDN</strong> - CSS framework</li>
+                    </ul>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Each of these services has its own privacy policy regarding data collection and usage.
+                    </p>
+
+                    <h3 class="mt-5 mb-3" style="color: var(--text-heading);">Cookies</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        This website uses minimal cookies. The only cookie stored is for theme preference (dark/light mode), which is stored in your browser's local storage and does not contain any personal information. Google Analytics may also set cookies for traffic analysis.
+                    </p>
+
+                    <h3 class="mt-5 mb-3" style="color: var(--text-heading);">Your Rights</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        You have the right to:
+                    </p>
+                    <ul style="color: var(--text-secondary); line-height: 2;">
+                        <li>Request access to your personal data</li>
+                        <li>Request correction of your personal data</li>
+                        <li>Request deletion of your personal data</li>
+                        <li>Opt out of Google Analytics tracking</li>
+                    </ul>
+
+                    <h3 class="mt-5 mb-3" style="color: var(--text-heading);">Changes to This Policy</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        I may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date.
+                    </p>
+
+                    <h3 class="mt-5 mb-3" style="color: var(--text-heading);">Contact</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        If you have any questions about this Privacy Policy, please contact me at:
+                        <a href="mailto:sardarozair13@gmail.com" style="color: var(--accent);">sardarozair13@gmail.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

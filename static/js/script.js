@@ -169,8 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(function (response) {
                 if (response.ok) {
-                    showToast('Message sent successfully! I\'ll get back to you soon.', 'success');
-                    contactForm.reset();
+                    window.location.href = '/thank-you/';
                 } else {
                     showToast('Something went wrong. Please try again.', 'error');
                 }
