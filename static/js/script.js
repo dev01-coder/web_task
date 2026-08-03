@@ -42,6 +42,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // === Close Mobile Nav on Link Click ===
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(function (link) {
+        link.addEventListener('click', function () {
+            var collapseEl = document.getElementById('navbarNav');
+            if (collapseEl) {
+                var bsCollapse = bootstrap.Collapse.getInstance(collapseEl);
+                if (bsCollapse) bsCollapse.hide();
+            }
+        });
+    });
+
     // === Back to Top Button ===
     var backToTop = document.getElementById('backToTop');
     function handleBackToTop() {
@@ -344,7 +355,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     var yPos = col.y - (col.chars.length - j) * (fontSize * 1.7);
                     if (yPos > H() + 50 || yPos < -50) continue;
                     var distFromHead = (col.chars.length - 1 - j) / col.chars.length;
-                    var alpha = (1 - distFromHead * 0.7) * 0.15;
+                    var alpha = (1 - distFromHead * 0.7) * 0.25;
                     if (j === col.chars.length - 1) {
                         ctx.fillStyle = rgba(colors.rainHead, alpha + 0.18);
                     } else {
