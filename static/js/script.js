@@ -93,6 +93,42 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // === Prevent swipe-to-open/close nav panel ===
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var isSwiping = false;
+    document.addEventListener('touchstart', function (e) {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        isSwiping = false;
+    }, { passive: true });
+    document.addEventListener('touchmove', function (e) {
+        var dx = Math.abs(e.changedTouches[0].screenX - touchStartX);
+        var dy = Math.abs(e.changedTouches[0].screenY - touchStartY);
+        if (dx > dy && dx > 10) isSwiping = true;
+    }, { passive: true });
+    document.addEventListener('touchend', function (e) {
+        if (!isSwiping) return;
+        var collapseEl = document.getElementById('navbarNav');
+        if (!collapseEl) return;
+        if (collapseEl.classList.contains('show')) {
+            var bsCollapse = bootstrap.Collapse.getInstance(collapseEl);
+            if (bsCollapse) bsCollapse.hide();
+        }
+        if (navbarToggler) {
+            navbarToggler.setAttribute('data-swipe-blocked', 'true');
+            setTimeout(function () { navbarToggler.removeAttribute('data-swipe-blocked'); }, 300);
+        }
+    }, { passive: true });
+    if (navbarToggler) {
+        navbarToggler.addEventListener('click', function (e) {
+            if (this.getAttribute('data-swipe-blocked') === 'true') {
+                e.stopImmediatePropagation();
+                e.preventDefault();
+            }
+        });
+    }
+
     // === Back to Top Button ===
     var backToTop = document.getElementById('backToTop');
     function handleBackToTop() {
