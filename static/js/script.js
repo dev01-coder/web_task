@@ -363,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 columns.push({
                     x: i * colWidth + fontSize,
                     y: Math.random() * H() * -1,
-                    speed: 0.3 + Math.random() * 0.8,
+                    speed: 0.6 + Math.random() * 1.4,
                     chars: [],
                     maxChars: 6 + Math.floor(Math.random() * 10),
                     termTimer: 0,
@@ -394,9 +394,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     var yPos = col.y - (col.chars.length - j) * (fontSize * 1.7);
                     if (yPos > H() + 50 || yPos < -50) continue;
                     var distFromHead = (col.chars.length - 1 - j) / col.chars.length;
-                    var alpha = (1 - distFromHead * 0.7) * 0.25;
+                    var alpha = (1 - distFromHead * 0.7) * 0.32;
                     if (j === col.chars.length - 1) {
-                        ctx.fillStyle = rgba(colors.rainHead, alpha + 0.18);
+                        ctx.fillStyle = rgba(colors.rainHead, alpha + 0.22);
                     } else {
                         ctx.fillStyle = rgba(colors.rain, alpha);
                     }
@@ -405,7 +405,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (col.y - col.chars.length * (fontSize * 1.7) > H()) {
                     col.y = Math.random() * H() * -0.5;
                     col.chars = [];
-                    col.speed = 0.3 + Math.random() * 0.8;
+                    col.speed = 0.6 + Math.random() * 1.4;
                 }
             }
         }
@@ -528,7 +528,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         var hexFrame = 0;
+        var aiVisible = true;
+        var aiObserver = new IntersectionObserver(function (entries) {
+            aiVisible = entries[0].isIntersecting;
+        }, { threshold: 0 });
+        aiObserver.observe(canvas);
+
         function animate() {
+            if (!aiVisible) { requestAnimationFrame(animate); return; }
             ctx.clearRect(0, 0, W(), H());
             hexFrame++;
             if (hexFrame % 6 === 0) {
@@ -605,31 +612,34 @@ document.addEventListener('DOMContentLoaded', function () {
             return 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + a + ')';
         }
 
+        var profileImg = canvas.parentElement.querySelector('.hero-profile-img');
+        var overshoot = 90;
         function resize() {
-            var wrapper = canvas.parentElement;
+            var imgW = profileImg ? profileImg.offsetWidth : 400;
+            var imgH = profileImg ? profileImg.offsetHeight : 400;
             var dpr = window.devicePixelRatio || 1;
-            canvas.width = wrapper.offsetWidth * dpr;
-            canvas.height = wrapper.offsetHeight * dpr;
+            canvas.width = (imgW + overshoot * 2) * dpr;
+            canvas.height = (imgH + overshoot * 2) * dpr;
             ctx.scale(dpr, dpr);
-            canvas.style.width = wrapper.offsetWidth + 'px';
-            canvas.style.height = wrapper.offsetHeight + 'px';
+            canvas.style.width = (imgW + overshoot * 2) + 'px';
+            canvas.style.height = (imgH + overshoot * 2) + 'px';
         }
         resize();
         window.addEventListener('resize', resize);
 
         var W = function () { return canvas.width / (window.devicePixelRatio || 1); };
         var H = function () { return canvas.height / (window.devicePixelRatio || 1); };
-        var centerX = function () { return W() / 2; };
-        var centerY = function () { return H() / 2; };
+        var centerX = function () { return profileImg ? profileImg.offsetWidth / 2 + overshoot : W() / 2; };
+        var centerY = function () { return profileImg ? profileImg.offsetHeight / 2 + overshoot : H() / 2; };
 
-        var nodeCount = isMobile ? 18 : 30;
+        var nodeCount = isMobile ? 25 : 40;
         var nodes = [];
 
         function initNodes() {
             nodes = [];
             for (var i = 0; i < nodeCount; i++) {
                 var angle = (Math.PI * 2 / nodeCount) * i;
-                var radius = 80 + Math.random() * 60;
+                var radius = 210 + Math.random() * 70;
                 nodes.push({
                     angle: angle,
                     radius: radius,
@@ -652,7 +662,14 @@ document.addEventListener('DOMContentLoaded', function () {
             mouseX = -1000; mouseY = -1000;
         });
 
+        var profileVisible = true;
+        var profileObserver = new IntersectionObserver(function (entries) {
+            profileVisible = entries[0].isIntersecting;
+        }, { threshold: 0 });
+        profileObserver.observe(canvas.parentElement);
+
         function animate() {
+            if (!profileVisible) { requestAnimationFrame(animate); return; }
             ctx.clearRect(0, 0, W(), H());
 
             var cx = centerX();
@@ -661,7 +678,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Draw orbital rings
             ctx.strokeStyle = rgba(colors.orbit, 0.06);
             ctx.lineWidth = 0.5;
-            for (var r = 80; r <= 140; r += 20) {
+            for (var r = 200; r <= 290; r += 30) {
                 ctx.beginPath();
                 ctx.arc(cx, cy, r, 0, Math.PI * 2);
                 ctx.stroke();
@@ -680,8 +697,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Mouse repulsion
                 var dx = x - mouseX, dy = y - mouseY;
                 var dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 80) {
-                    var force = (80 - dist) / 80 * 2;
+                if (dist < 100) {
+                    var force = (100 - dist) / 100 * 2;
                     positions[i].x += (dx / dist) * force;
                     positions[i].y += (dy / dist) * force;
                 }
@@ -693,8 +710,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     var dx = positions[i].x - positions[j].x;
                     var dy = positions[i].y - positions[j].y;
                     var dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 100) {
-                        var alpha = (1 - dist / 100) * 0.2;
+                    if (dist < 120) {
+                        var alpha = (1 - dist / 120) * 0.2;
                         ctx.beginPath();
                         ctx.strokeStyle = rgba(colors.connection, alpha);
                         ctx.lineWidth = 0.6;

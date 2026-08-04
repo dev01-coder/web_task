@@ -67,12 +67,10 @@
     </script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg sticky-top" id="mainNav">
+    <nav class="navbar navbar-expand-lg sticky-top" id="mainNav" aria-label="Main navigation">
         <div class="container">
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                <i class="fas fa-sun icon-sun"></i>
-                <i class="fas fa-moon icon-moon"></i>
-                <span class="theme-toggle-slider"></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="nav-backdrop" id="navBackdrop"></div>
@@ -98,8 +96,10 @@
                 </div>
             </div>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fas fa-sun icon-sun"></i>
+                <i class="fas fa-moon icon-moon"></i>
+                <span class="theme-toggle-slider"></span>
             </button>
         </div>
     </nav>
@@ -110,17 +110,20 @@
 
     <footer class="footer-section">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h5 style="color:var(--accent); font-family:'JetBrains Mono',monospace;">Ozair Ilyas</h5>
-                    <p class="mb-3">Jr. AI Engineer specializing in Healthcare AI, Machine Learning, and Large Language Models. Building intelligent solutions that make a difference.</p>
-                    <div class="social-links">
-                        <a href="https://github.com/dev01-coder" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="https://pk.linkedin.com/in/ozair-ilyas" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="mailto:sardarozair13@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-                    </div>
+            <div class="footer-intro">
+                <h5 style="color:var(--accent); font-family:'JetBrains Mono',monospace;">Ozair Ilyas</h5>
+                <p class="mb-3">Jr. AI Engineer specializing in Healthcare AI, Machine Learning, and Large Language Models. Building intelligent solutions that make a difference.</p>
+                <div class="social-links">
+                    <a href="https://github.com/dev01-coder" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://pk.linkedin.com/in/ozair-ilyas" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:sardarozair13@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
                 </div>
-                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="row">
+                <div class="col-6 col-md-4 mb-3 mb-md-0">
                     <h5>Navigation</h5>
                     <ul class="list-unstyled footer-links">
                         <li><a href="/">Home</a></li>
@@ -129,7 +132,15 @@
                         <li><a href="/blog/">Blog</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+                <div class="col-6 col-md-4 mb-3 mb-md-0">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><i class="fas fa-envelope me-2" style="color:var(--accent);"></i><a href="mailto:sardarozair13@gmail.com">Email</a></li>
+                        <li><i class="fab fa-linkedin-in me-2" style="color:var(--accent);"></i><a href="https://pk.linkedin.com/in/ozair-ilyas" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><i class="fab fa-github me-2" style="color:var(--accent);"></i><a href="https://github.com/dev01-coder" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 d-none d-md-block">
                     <h5>Services</h5>
                     <ul class="list-unstyled footer-links">
                         <li><a href="/services/">AI & Machine Learning</a></li>
@@ -138,15 +149,8 @@
                         <li><a href="/services/">Cloud Deployment</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-3 col-md-4">
-                    <h5>Contact</h5>
-                    <ul class="list-unstyled footer-links">
-                        <li><i class="fas fa-envelope me-2" style="color:var(--accent);"></i><a href="mailto:sardarozair13@gmail.com">sardarozair13@gmail.com</a></li>
-                        <li><i class="fab fa-linkedin-in me-2" style="color:var(--accent);"></i><a href="https://pk.linkedin.com/in/ozair-ilyas" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a></li>
-                        <li><i class="fab fa-github me-2" style="color:var(--accent);"></i><a href="https://github.com/dev01-coder" target="_blank" rel="noopener noreferrer">GitHub Profile</a></li>
-                    </ul>
-                </div>
             </div>
+
             <div class="footer-bottom">
                 <p>&copy; {{ now.year }} Ozair Ilyas. All rights reserved.</p>
             </div>

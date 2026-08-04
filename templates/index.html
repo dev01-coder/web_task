@@ -4,7 +4,7 @@
 
 {% block content %}
 <section class="hero-section" id="hero">
-    <canvas id="ai-canvas"></canvas>
+    <canvas id="ai-canvas" aria-hidden="true"></canvas>
     <div class="container h-100 d-flex align-items-center" style="position:relative;z-index:1;">
         <div class="row w-100 align-items-center">
             <div class="col-lg-7 mb-5 mb-lg-0">
@@ -21,14 +21,14 @@
                     </a>
                 </div>
                 <div class="hero-social">
-                    <a href="https://github.com/dev01-coder" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://pk.linkedin.com/in/ozair-ilyas" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="mailto:sardarozair13@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/dev01-coder" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://pk.linkedin.com/in/ozair-ilyas" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:sardarozair13@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
             <div class="col-lg-5 hero-profile-wrapper">
                 <div class="profile-canvas-wrapper">
-                    <canvas id="profile-canvas"></canvas>
+                    <canvas id="profile-canvas" aria-hidden="true"></canvas>
                     <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Ozair Ilyas - AI Engineer" class="hero-profile-img">
                 </div>
             </div>
