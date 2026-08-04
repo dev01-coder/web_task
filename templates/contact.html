@@ -4,7 +4,7 @@
 
 {% block content %}
 <section class="page-header">
-    <canvas class="ai-page-canvas"></canvas>
+    <canvas class="ai-page-canvas" aria-hidden="true"></canvas>
     <div class="container" style="position:relative;z-index:1;">
         <h1>Get In Touch</h1>
         <p>Let's discuss your next project</p>
@@ -61,11 +61,11 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="subject" class="form-label">Subject</label>
-                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Project Discussion">
+                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="">
                                 </div>
                                 <div class="col-12">
                                     <label for="message" class="form-label">Message *</label>
-                                    <textarea class="form-control" id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+                                    <textarea class="form-control" id="message" name="message" rows="5" placeholder="" required></textarea>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">

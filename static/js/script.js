@@ -614,9 +614,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var profileImg = canvas.parentElement.querySelector('.hero-profile-img');
         var overshoot = 90;
+        var orbitMin = 210;
+        var orbitRange = 70;
+        var ringStart = 200;
+        var ringEnd = 290;
+        var ringStep = 30;
+
         function resize() {
             var imgW = profileImg ? profileImg.offsetWidth : 400;
             var imgH = profileImg ? profileImg.offsetHeight : 400;
+            overshoot = Math.round(imgW * 0.225);
+            orbitMin = Math.round(imgW * 0.52);
+            orbitRange = Math.round(imgW * 0.18);
+            ringStart = Math.round(imgW * 0.50);
+            ringEnd = Math.round(imgW * 0.72);
+            ringStep = Math.round(imgW * 0.07);
             var dpr = window.devicePixelRatio || 1;
             canvas.width = (imgW + overshoot * 2) * dpr;
             canvas.height = (imgH + overshoot * 2) * dpr;
@@ -639,7 +651,7 @@ document.addEventListener('DOMContentLoaded', function () {
             nodes = [];
             for (var i = 0; i < nodeCount; i++) {
                 var angle = (Math.PI * 2 / nodeCount) * i;
-                var radius = 210 + Math.random() * 70;
+                var radius = orbitMin + Math.random() * orbitRange;
                 nodes.push({
                     angle: angle,
                     radius: radius,
@@ -678,7 +690,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Draw orbital rings
             ctx.strokeStyle = rgba(colors.orbit, 0.06);
             ctx.lineWidth = 0.5;
-            for (var r = 200; r <= 290; r += 30) {
+            for (var r = ringStart; r <= ringEnd; r += ringStep) {
                 ctx.beginPath();
                 ctx.arc(cx, cy, r, 0, Math.PI * 2);
                 ctx.stroke();
