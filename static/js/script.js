@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var touchStartX = 0;
     var touchStartY = 0;
     var isSwiping = false;
+    var swipeBlockedUntil = 0;
     document.addEventListener('touchstart', function (e) {
         touchStartX = e.changedTouches[0].screenX;
         touchStartY = e.changedTouches[0].screenY;
@@ -109,22 +110,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { passive: true });
     document.addEventListener('touchend', function (e) {
         if (!isSwiping) return;
+        swipeBlockedUntil = Date.now() + 400;
         var collapseEl = document.getElementById('navbarNav');
         if (!collapseEl) return;
         if (collapseEl.classList.contains('show')) {
             var bsCollapse = bootstrap.Collapse.getInstance(collapseEl);
             if (bsCollapse) bsCollapse.hide();
         }
-        if (navbarToggler) {
-            navbarToggler.setAttribute('data-swipe-blocked', 'true');
-            setTimeout(function () { navbarToggler.removeAttribute('data-swipe-blocked'); }, 300);
-        }
     }, { passive: true });
     if (navbarToggler) {
         navbarToggler.addEventListener('click', function (e) {
-            if (this.getAttribute('data-swipe-blocked') === 'true') {
+            if (Date.now() < swipeBlockedUntil) {
                 e.stopImmediatePropagation();
                 e.preventDefault();
+                return;
             }
         });
     }
