@@ -65,6 +65,34 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // === Backdrop Click to Close Mobile Nav ===
+    var navBackdrop = document.getElementById('navBackdrop');
+    if (navBackdrop) {
+        navBackdrop.addEventListener('click', function () {
+            var collapseEl = document.getElementById('navbarNav');
+            if (collapseEl) {
+                var bsCollapse = bootstrap.Collapse.getInstance(collapseEl);
+                if (bsCollapse) bsCollapse.hide();
+            }
+        });
+    }
+
+    // === Toggle backdrop + toggler active class on nav show/hide ===
+    var navbarNav = document.getElementById('navbarNav');
+    var navbarToggler = document.querySelector('.navbar-toggler');
+    if (navbarNav) {
+        navbarNav.addEventListener('show.bs.collapse', function () {
+            if (navBackdrop) navBackdrop.classList.add('active');
+            if (navbarToggler) navbarToggler.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        navbarNav.addEventListener('hide.bs.collapse', function () {
+            if (navBackdrop) navBackdrop.classList.remove('active');
+            if (navbarToggler) navbarToggler.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+
     // === Back to Top Button ===
     var backToTop = document.getElementById('backToTop');
     function handleBackToTop() {
