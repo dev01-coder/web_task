@@ -161,7 +161,7 @@ img { max-width: 100%; height: auto; }
     display: flex;
     align-items: center;
     justify-content: center;
-    order: 1;
+    order: 2;
 }
 
 .navbar-toggler:focus {
@@ -448,7 +448,7 @@ img { max-width: 100%; height: auto; }
 
 /* Theme Toggle Button */
 .theme-toggle {
-    order: 2;
+    order: 1;
     position: relative;
     background: var(--bg-tertiary);
     border: 1px solid var(--border-color);

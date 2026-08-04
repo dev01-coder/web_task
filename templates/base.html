@@ -69,8 +69,10 @@
 <body>
     <nav class="navbar navbar-expand-lg sticky-top" id="mainNav" aria-label="Main navigation">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fas fa-sun icon-sun"></i>
+                <i class="fas fa-moon icon-moon"></i>
+                <span class="theme-toggle-slider"></span>
             </button>
 
             <div class="nav-backdrop" id="navBackdrop"></div>
@@ -96,10 +98,8 @@
                 </div>
             </div>
 
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                <i class="fas fa-sun icon-sun"></i>
-                <i class="fas fa-moon icon-moon"></i>
-                <span class="theme-toggle-slider"></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
