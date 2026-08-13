@@ -415,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 columns.push({
                     x: i * colWidth + fontSize,
                     y: Math.random() * H() * -1,
-                    speed: 0.6 + Math.random() * 1.4,
+                    speed: canvas.id === 'ai-canvas' ? 1.0 + Math.random() * 2.0 : 0.6 + Math.random() * 1.4,
                     chars: [],
                     maxChars: 6 + Math.floor(Math.random() * 10),
                     termTimer: 0,
@@ -458,7 +458,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (col.y - col.chars.length * (fontSize * 1.7) > H()) {
                     col.y = Math.random() * H() * -0.5;
                     col.chars = [];
-                    col.speed = 0.6 + Math.random() * 1.4;
+                    col.speed = canvas.id === 'ai-canvas' ? 1.0 + Math.random() * 2.0 : 0.6 + Math.random() * 1.4;
                 }
             }
         }
