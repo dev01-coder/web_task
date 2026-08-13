@@ -758,10 +758,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     var dy = positions[i].y - positions[j].y;
                     var dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < 120) {
-                        var alpha = (1 - dist / 120) * 0.2;
+                        var alpha = (1 - dist / 120) * 0.45;
                         ctx.beginPath();
                         ctx.strokeStyle = rgba(colors.connection, alpha);
-                        ctx.lineWidth = 0.6;
+                        ctx.lineWidth = 0.8;
                         ctx.moveTo(positions[i].x, positions[i].y);
                         ctx.lineTo(positions[j].x, positions[j].y);
                         ctx.stroke();
@@ -778,13 +778,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Glow
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, r + 4, 0, Math.PI * 2);
-                ctx.fillStyle = rgba(colors.nodeGlow, glow * 0.15);
+                ctx.fillStyle = rgba(colors.nodeGlow, glow * 0.08);
                 ctx.fill();
 
                 // Core
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-                ctx.fillStyle = rgba(colors.node, 0.5 + glow * 0.3);
+                ctx.fillStyle = rgba(colors.node, 0.3 + glow * 0.15);
                 ctx.fill();
             }
 

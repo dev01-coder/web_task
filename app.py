@@ -33,6 +33,23 @@ PROJECTS = [
     },
     {
         'id': 2,
+        'title': 'MediAssist: Healthcare RAG Chatbot',
+        'description': 'Production-ready healthcare RAG chatbot combining ChromaDB vector search with BM25 keyword matching across 27,000+ medical documents from NIH\'s MedQuAD dataset. Supports 4 LLM providers with real-time SSE streaming.',
+        'tech': ['Python', 'FastAPI', 'React', 'ChromaDB', 'RAG', 'Groq', 'Gemini', 'Tailwind CSS'],
+        'image': 'https://raw.githubusercontent.com/dev01-coder/Healthcare-Chatbot/main/screenshot.png',
+        'github_url': 'https://github.com/dev01-coder/Healthcare-Chatbot',
+        'live_url': '',
+        'category': 'ai,healthcare',
+        'highlights': [
+            'Hybrid retrieval: ChromaDB vector search + BM25 keyword matching with Reciprocal Rank Fusion',
+            '27,000+ medical documents from NIH MedQuAD dataset indexed and searchable',
+            '4 LLM providers: Groq (free), Gemini, Ollama (local), Anthropic with SSE streaming',
+            'Emergency detection for 7 life-threatening categories with instant response',
+            'React + Tailwind UI with source citations, medical disclaimers, and rate limiting'
+        ]
+    },
+    {
+        'id': 3,
         'title': 'AI Invoice Processor',
         'description': 'Full-stack AI invoice processing system with OCR extraction, NLP-based field parsing, ML classification, and anomaly detection.',
         'tech': ['Python', 'FastAPI', 'Streamlit', 'Tesseract', 'scikit-learn', 'Docker'],
@@ -49,7 +66,7 @@ PROJECTS = [
         ]
     },
     {
-        'id': 3,
+        'id': 4,
         'title': 'ArticleBot: Article Research Tool',
         'description': 'Intelligent document analysis and Q&A application using LLMs and vector embeddings. Provide any article URL, ask natural language questions, and get accurate answers with source citations.',
         'tech': ['Python', 'LangChain', 'OpenAI', 'FAISS', 'Streamlit', 'Selenium'],
@@ -66,7 +83,7 @@ PROJECTS = [
         ]
     },
     {
-        'id': 4,
+        'id': 5,
         'title': 'AI-Powered HCFA OCR',
         'description': 'Web application to automate data extraction from HCFA forms using OCR technology, extracting billing details and eliminating manual data entry.',
         'tech': ['Python', 'Gemini', 'Flask', 'Google Vision', 'Azure'],
@@ -83,7 +100,7 @@ PROJECTS = [
         ]
     },
     {
-        'id': 5,
+        'id': 6,
         'title': 'AI Medical Coding Assistant',
         'description': 'LLM-powered system for predicting ICD, CPT, and Modifier codes from medical records using RAG and OCR for processing medical documents.',
         'tech': ['Python', 'Flask', 'Langchain', 'MySQL', 'Docker', 'Azure'],
@@ -100,7 +117,7 @@ PROJECTS = [
         ]
     },
     {
-        'id': 6,
+        'id': 7,
         'title': 'Claim Denial Prediction System',
         'description': 'Machine learning system to forecast acceptance or rejection of claims based on 837 data using Random Forest, Neural Networks, and Decision Trees.',
         'tech': ['Python', 'Gemini', 'Flask', 'Google Vision', 'Azure', 'ML'],
