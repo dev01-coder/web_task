@@ -684,17 +684,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function initNodes() {
             nodes = [];
-            for (var i = 0; i < nodeCount; i++) {
-                var angle = (Math.PI * 2 / nodeCount) * i;
-                var radius = orbitMin + Math.random() * orbitRange;
-                nodes.push({
-                    angle: angle,
-                    radius: radius,
-                    speed: 0.003 + Math.random() * 0.006,
-                    size: 1.5 + Math.random() * 2,
-                    pulse: Math.random() * Math.PI * 2,
-                    drift: (Math.random() - 0.5) * 0.5
-                });
+            var rings = isMobile ? 2 : 3;
+            var nodesPerRing = Math.ceil(nodeCount / rings);
+            for (var ring = 0; ring < rings; ring++) {
+                var ringRadius = orbitMin + (orbitRange / rings) * ring;
+                var ringNodes = ring === rings - 1 ? nodeCount - nodesPerRing * (rings - 1) : nodesPerRing;
+                for (var i = 0; i < ringNodes; i++) {
+                    var angle = (Math.PI * 2 / ringNodes) * i + (ring * 0.5);
+                    nodes.push({
+                        angle: angle,
+                        radius: ringRadius,
+                        speed: 0.003 + Math.random() * 0.006,
+                        size: 1.5 + Math.random() * 1.5,
+                        pulse: Math.random() * Math.PI * 2,
+                        drift: (Math.random() - 0.5) * 0.3
+                    });
+                }
             }
         }
         initNodes();
@@ -757,11 +762,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     var dx = positions[i].x - positions[j].x;
                     var dy = positions[i].y - positions[j].y;
                     var dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 120) {
-                        var alpha = (1 - dist / 120) * 0.45;
+                    if (dist < 160) {
+                        var alpha = (1 - dist / 160) * 0.65;
                         ctx.beginPath();
                         ctx.strokeStyle = rgba(colors.connection, alpha);
-                        ctx.lineWidth = 0.8;
+                        ctx.lineWidth = 1.2;
                         ctx.moveTo(positions[i].x, positions[i].y);
                         ctx.lineTo(positions[j].x, positions[j].y);
                         ctx.stroke();

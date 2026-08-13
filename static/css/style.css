@@ -1665,12 +1665,7 @@ section {
 /* Mobile */
 @media (max-width: 767px) {
     .hero-section { min-height: 0; padding: 80px 0 50px; }
-    .hero-section .col-lg-7 { text-align: center; }
-    .hero-section .hero-greeting { text-align: center; }
-    .hero-section h1 { font-size: 2rem; text-align: center; }
-    .hero-section .hero-subtitle { font-size: 1.1rem; text-align: center; }
-    .hero-section .hero-description { font-size: 0.95rem; text-align: center; margin-left: auto; margin-right: auto; }
-    .hero-section .hero-buttons { justify-content: center; }
+    .hero-section h1 { font-size: 2rem; }
     .hero-profile-img { width: 220px; height: 220px; }
     .hero-buttons { flex-direction: column; gap: 0.75rem; }
     .hero-buttons .btn { width: 100%; padding: 0.75rem; }
@@ -1723,6 +1718,7 @@ section {
     .profile-canvas-wrapper #profile-canvas { top: -40px; left: -40px; width: calc(100% + 80px); height: calc(100% + 80px); }
     .footer-intro { text-align: center; }
     .footer-divider { margin: 1.5rem auto; }
+    .footer-intro h5 { font-size: 0.8rem; text-align: center; margin-bottom: 0.6rem; }
     .footer-section h5 { font-size: 0.8rem; text-align: left; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.5px; }
     .footer-section ul li { text-align: left; margin-bottom: 0.3rem; }
     .footer-section ul li a { font-size: 0.8rem; }
