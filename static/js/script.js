@@ -355,6 +355,10 @@ document.addEventListener('DOMContentLoaded', function () {
             ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
         }
         resize();
+        window.addEventListener('resize', function() {
+            resize();
+            initColumns();
+        });
 
         var W = function () { return canvas.offsetWidth; };
         var H = function () { return canvas.offsetHeight; };
@@ -410,11 +414,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 columns.push({
                     x: i * colWidth + fontSize,
                     y: Math.random() * H() * -1,
-                    speed: isMobile ? 1.2 + Math.random() * 1.8 : 1.0 + Math.random() * 2.0,
+                    speed: canvas.id === 'ai-canvas' ? 0.8 + Math.random() * 1.8 : 0.6 + Math.random() * 1.4,
                     chars: [],
-                    maxChars: 8 + Math.floor(Math.random() * 12),
+                    maxChars: canvas.id === 'ai-canvas' ? 8 + Math.floor(Math.random() * 12) : 6 + Math.floor(Math.random() * 10),
                     termTimer: 0,
-                    termInterval: 3 + Math.floor(Math.random() * 5)
+                    termInterval: canvas.id === 'ai-canvas' ? 3 + Math.floor(Math.random() * 5) : 4 + Math.floor(Math.random() * 8)
                 });
             }
         }
@@ -453,7 +457,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (col.y - col.chars.length * (fontSize * 1.7) > H()) {
                     col.y = Math.random() * H() * -0.5;
                     col.chars = [];
-                    col.speed = 0.6 + Math.random() * 1.4;
+                    col.speed = canvas.id === 'ai-canvas' ? 0.8 + Math.random() * 1.8 : 0.6 + Math.random() * 1.4;
                 }
             }
         }
