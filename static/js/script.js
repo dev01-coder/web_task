@@ -359,6 +359,18 @@ document.addEventListener('DOMContentLoaded', function () {
         var W = function () { return canvas.offsetWidth; };
         var H = function () { return canvas.offsetHeight; };
 
+        var profileBounds = null;
+        function updateProfileBounds() {
+            var pw = document.querySelector('.hero-profile-wrapper');
+            if (pw) {
+                var r = pw.getBoundingClientRect();
+                var cr = canvas.getBoundingClientRect();
+                profileBounds = { left: r.left - cr.left - 40, right: r.right - cr.left + 40 };
+            }
+        }
+        updateProfileBounds();
+        window.addEventListener('resize', updateProfileBounds);
+
         var CODE_TERMS = [
             'def train()', 'model.fit()', 'import torch', 'import tf',
             'class AI', 'nn.Linear', 'optimizer.step()', 'loss.backward()',
@@ -391,18 +403,18 @@ document.addEventListener('DOMContentLoaded', function () {
         var columns = [];
 
         function initColumns() {
-            var colWidth = fontSize * 2.5;
+            var colWidth = fontSize * 2.0;
             var columnCount = Math.floor(W() / colWidth);
             columns = [];
             for (var i = 0; i < columnCount; i++) {
                 columns.push({
                     x: i * colWidth + fontSize,
                     y: Math.random() * H() * -1,
-                    speed: 0.6 + Math.random() * 1.4,
+                    speed: isMobile ? 1.2 + Math.random() * 1.8 : 1.0 + Math.random() * 2.0,
                     chars: [],
-                    maxChars: 6 + Math.floor(Math.random() * 10),
+                    maxChars: 8 + Math.floor(Math.random() * 12),
                     termTimer: 0,
-                    termInterval: 4 + Math.floor(Math.random() * 8)
+                    termInterval: 3 + Math.floor(Math.random() * 5)
                 });
             }
         }
@@ -420,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 col.termTimer++;
                 if (col.termTimer >= col.termInterval) {
                     col.termTimer = 0;
-                    col.termInterval = 4 + Math.floor(Math.random() * 8);
+                    col.termInterval = 3 + Math.floor(Math.random() * 5);
                     col.chars.push({ text: getRandomTerm() });
                     if (col.chars.length > col.maxChars) col.chars.shift();
                 }
@@ -428,6 +440,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     var ch = col.chars[j];
                     var yPos = col.y - (col.chars.length - j) * (fontSize * 1.7);
                     if (yPos > H() + 50 || yPos < -50) continue;
+                    if (profileBounds && col.x > profileBounds.left && col.x < profileBounds.right) continue;
                     var distFromHead = (col.chars.length - 1 - j) / col.chars.length;
                     var alpha = (1 - distFromHead * 0.7) * 0.32;
                     if (j === col.chars.length - 1) {
@@ -658,7 +671,7 @@ document.addEventListener('DOMContentLoaded', function () {
         function resize() {
             var imgW = profileImg ? profileImg.offsetWidth : 400;
             var imgH = profileImg ? profileImg.offsetHeight : 400;
-            overshoot = Math.round(imgW * 0.225);
+            overshoot = imgW <= 180 ? 30 : (imgW <= 220 ? 40 : Math.round(imgW * 0.225));
             orbitMin = Math.round(imgW * 0.52);
             orbitRange = Math.round(imgW * 0.18);
             ringStart = Math.round(imgW * 0.50);
@@ -762,8 +775,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     var dx = positions[i].x - positions[j].x;
                     var dy = positions[i].y - positions[j].y;
                     var dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 160) {
-                        var alpha = (1 - dist / 160) * 0.25;
+                    var maxDist = isMobile ? 110 : 160;
+                    if (dist < maxDist) {
+                        var alpha = (1 - dist / maxDist) * 0.25;
                         ctx.beginPath();
                         ctx.strokeStyle = rgba(colors.connection, alpha);
                         ctx.lineWidth = 0.6;
@@ -783,13 +797,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Glow
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, r + 4, 0, Math.PI * 2);
-                ctx.fillStyle = rgba(colors.nodeGlow, glow * 0.20);
+                var glowAlpha = isMobile ? glow * 0.12 : glow * 0.20;
+                ctx.fillStyle = rgba(colors.nodeGlow, glowAlpha);
                 ctx.fill();
 
                 // Core
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-                ctx.fillStyle = rgba(colors.node, 0.5 + glow * 0.3);
+                var coreAlpha = isMobile ? 0.35 + glow * 0.2 : 0.5 + glow * 0.3;
+                ctx.fillStyle = rgba(colors.node, coreAlpha);
                 ctx.fill();
             }
 

@@ -1664,7 +1664,7 @@ section {
 
 /* Mobile */
 @media (max-width: 767px) {
-    .hero-section { min-height: 0; padding: 80px 0 50px; }
+    .hero-section { min-height: 0; padding: 70px 0 30px; }
     .hero-section h1 { font-size: 2rem; }
     .hero-profile-img { width: 220px; height: 220px; }
     .hero-buttons { flex-direction: column; gap: 0.75rem; }
