@@ -728,8 +728,8 @@ document.addEventListener('DOMContentLoaded', function () {
             var cy = centerY();
 
             // Draw orbital rings
-            ctx.strokeStyle = rgba(colors.orbit, 0.06);
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = rgba(colors.orbit, 0.12);
+            ctx.lineWidth = 1.0;
             for (var r = ringStart; r <= ringEnd; r += ringStep) {
                 ctx.beginPath();
                 ctx.arc(cx, cy, r, 0, Math.PI * 2);
@@ -763,10 +763,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     var dy = positions[i].y - positions[j].y;
                     var dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < 160) {
-                        var alpha = (1 - dist / 160) * 0.65;
+                        var alpha = (1 - dist / 160) * 0.25;
                         ctx.beginPath();
                         ctx.strokeStyle = rgba(colors.connection, alpha);
-                        ctx.lineWidth = 1.2;
+                        ctx.lineWidth = 0.6;
                         ctx.moveTo(positions[i].x, positions[i].y);
                         ctx.lineTo(positions[j].x, positions[j].y);
                         ctx.stroke();
@@ -783,13 +783,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Glow
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, r + 4, 0, Math.PI * 2);
-                ctx.fillStyle = rgba(colors.nodeGlow, glow * 0.08);
+                ctx.fillStyle = rgba(colors.nodeGlow, glow * 0.20);
                 ctx.fill();
 
                 // Core
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-                ctx.fillStyle = rgba(colors.node, 0.3 + glow * 0.15);
+                ctx.fillStyle = rgba(colors.node, 0.5 + glow * 0.3);
                 ctx.fill();
             }
 
