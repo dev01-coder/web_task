@@ -365,6 +365,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var profileBounds = null;
         function updateProfileBounds() {
+            if (isMobile) { profileBounds = null; return; }
             var pw = document.querySelector('.hero-profile-wrapper');
             if (pw) {
                 var r = pw.getBoundingClientRect();
@@ -414,11 +415,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 columns.push({
                     x: i * colWidth + fontSize,
                     y: Math.random() * H() * -1,
-                    speed: canvas.id === 'ai-canvas' ? 0.8 + Math.random() * 1.8 : 0.6 + Math.random() * 1.4,
+                    speed: 0.6 + Math.random() * 1.4,
                     chars: [],
-                    maxChars: canvas.id === 'ai-canvas' ? 8 + Math.floor(Math.random() * 12) : 6 + Math.floor(Math.random() * 10),
+                    maxChars: 6 + Math.floor(Math.random() * 10),
                     termTimer: 0,
-                    termInterval: canvas.id === 'ai-canvas' ? 3 + Math.floor(Math.random() * 5) : 4 + Math.floor(Math.random() * 8)
+                    termInterval: 4 + Math.floor(Math.random() * 8)
                 });
             }
         }
@@ -436,7 +437,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 col.termTimer++;
                 if (col.termTimer >= col.termInterval) {
                     col.termTimer = 0;
-                    col.termInterval = 3 + Math.floor(Math.random() * 5);
+                    col.termInterval = 4 + Math.floor(Math.random() * 8);
                     col.chars.push({ text: getRandomTerm() });
                     if (col.chars.length > col.maxChars) col.chars.shift();
                 }
@@ -457,7 +458,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (col.y - col.chars.length * (fontSize * 1.7) > H()) {
                     col.y = Math.random() * H() * -0.5;
                     col.chars = [];
-                    col.speed = canvas.id === 'ai-canvas' ? 0.8 + Math.random() * 1.8 : 0.6 + Math.random() * 1.4;
+                    col.speed = 0.6 + Math.random() * 1.4;
                 }
             }
         }
