@@ -1673,6 +1673,8 @@ section {
     .hero-social { justify-content: center; gap: 0.8rem; }
     .hero-social a { width: 44px; height: 44px; font-size: 1rem; }
     .col-lg-7.mb-5 { margin-bottom: 1.5rem !important; }
+    .hero-description { text-align: center; }
+    .hero-buttons { justify-content: center; }
     section { padding: 2rem 0; }
     .section-title { font-size: 1.6rem; }
     .section-subtitle { font-size: 0.95rem; margin-bottom: 2rem; }
@@ -1709,8 +1711,16 @@ section {
     .education-list li { font-size: 0.9rem; padding: 0.6rem 0; }
     .skill-card { padding: 0.9rem; }
     .skill-card h6 { font-size: 0.9rem; }
-    .bio-text { font-size: 1rem; }
-    .blog-content { font-size: 0.93rem; }
+    .bio-text { font-size: 1rem; text-align: justify; }
+    .about-heading { text-align: center; }
+    .about-edu-heading { text-align: center; }
+    .education-list { text-align: center; }
+    .about-buttons { justify-content: center !important; }
+    .blog-content { font-size: 0.93rem; text-align: justify; }
+    .contact-heading { text-align: center; }
+    .contact-heading + p { text-align: center; }
+    .project-detail-content { text-align: justify; }
+    .project-detail-content li { text-align: justify; }
     .blog-content h3 { font-size: 1.15rem; }
     .blog-post-image { max-height: 160px; }
     .post-image { max-height: 160px; }
@@ -1745,7 +1755,7 @@ section {
     .hero-section h1 { font-size: 1.7rem; }
     .hero-greeting { font-size: 0.9rem; }
     .hero-subtitle { font-size: 1rem; }
-    .hero-description { font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .hero-description { font-size: 0.9rem; margin-bottom: 1.5rem; margin-left: auto; margin-right: auto; }
     .hero-profile-img { width: 160px; height: 160px; }
     .btn-lg { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
     .glass-card .icon-wrapper { width: 48px; height: 48px; font-size: 1.2rem; }

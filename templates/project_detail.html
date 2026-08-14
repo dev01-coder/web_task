@@ -23,7 +23,7 @@
                 </div>
 
                 <h2 class="mb-3" style="color:var(--text-heading);">{{ project.title }}</h2>
-                <p style="color:var(--text-secondary); font-size:1.1rem; line-height:1.8;">{{ project.description }}</p>
+                <p class="project-detail-content" style="color:var(--text-secondary); font-size:1.1rem; line-height:1.8;">{{ project.description }}</p>
 
                 <h4 class="mt-4 mb-3" style="color:var(--text-heading);">Technologies Used</h4>
                 <div class="d-flex flex-wrap gap-2 mb-4">
@@ -35,7 +35,7 @@
                 <hr style="border-color:var(--border-color);">
 
                 <h4 class="mt-4 mb-3" style="color:var(--text-heading);">Key Highlights</h4>
-                <ul style="color:var(--text-secondary); line-height:2;">
+                <ul class="project-detail-content" style="color:var(--text-secondary); line-height:2;">
                     {% for highlight in project.highlights %}
                     <li>{{ highlight }}</li>
                     {% endfor %}
